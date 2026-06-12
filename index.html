@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Technology and Society - SUNY Korea</title>
 <style>
-    /* basic setup & colors */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     html { scroll-behavior: smooth; }
     body { background-color: #f4f6f8; color: #333; line-height: 1.6; overflow-x: hidden; }
@@ -16,7 +15,6 @@
         --suny-navy: #002244;
     }
 
-    /* Header Style - 고정 높이와 패딩 최적화 */
     header { 
         background: white; 
         padding: 15px 50px; 
@@ -28,8 +26,7 @@
         top: 0; 
         z-index: 1000; 
     }
-    
-    /* 로고 배치 영역 스타일 */
+
     .logo-container { 
         display: flex; 
         align-items: center; 
@@ -53,7 +50,6 @@
     .search-tab input { background: transparent; border: none; outline: none; font-size: 0.85rem; width: 130px; }
     .search-tab button { background: none; border: none; font-size: 0.9rem; color: #666; margin-left: 5px; }
 
-    /* Sliding Navigation Drawer */
     .more-toggle-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 2001; }
     .more-toggle-btn span { width: 24px; height: 3px; background-color: var(--suny-navy); border-radius: 2px; transition: 0.3s; }
     .more-toggle-btn:hover span { background-color: var(--suny-red); }
@@ -80,14 +76,12 @@
     .sub-depth-links { padding-left: 15px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
     .sub-depth-links a { font-weight: 500; color: #666; font-size: 0.88rem; }
 
-    /* Hero Section */
     .hero { background: linear-gradient(rgba(0, 34, 68, 0.7), rgba(0, 34, 68, 0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover; color: white; text-align: center; padding: 130px 20px 180px 20px; }
     .hero h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 1px; }
     .hero p { font-size: 1.2rem; margin-bottom: 30px; color: #e0e0e0; }
     .btn-explore { display: inline-block; background: var(--suny-red); color: white; padding: 15px 35px; border-radius: 50px; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; box-shadow: 0 4px 15px rgba(153, 0, 0, 0.4); }
     .btn-explore:hover { background: #7a0000; transform: translateY(-3px); }
 
-    /* Main Action Buttons */
     .action-row { display: flex; gap: 25px; justify-content: center; max-width: 1200px; margin: -80px auto 60px auto; padding: 0 20px; position: relative; z-index: 10; }
     .action-btn { flex: 1; background: white; padding: 35px 25px; border-radius: 12px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.15); transition: 0.3s; border-bottom: 6px solid var(--suny-navy); }
     .action-btn:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
@@ -99,14 +93,11 @@
     .action-btn:hover span { background: var(--suny-navy); color: white; }
     .action-btn.red-theme:hover span { background: var(--suny-red); color: white; }
 
-    /* Split Content (양쪽 완벽한 5:5 비율 너비 매칭) */
     .content-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; align-items: start; }
     
-    /* 타이틀에 마우스 호버 효과 부여 (링크임을 인지하도록 함) */
     .section-title-link { display: block; font-size: 1.8rem; color: var(--suny-navy); margin-bottom: 25px; border-bottom: 2px solid #ddd; padding-bottom: 10px; text-transform: uppercase; width: 100%; transition: color 0.2s, border-color 0.2s; }
     .section-title-link:hover { color: var(--suny-red); border-color: var(--suny-red); }
 
-    /* News Top 5 Container */
     .news-container { background: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-top: 5px solid var(--suny-red); display: flex; flex-direction: column; overflow: hidden; }
     .news-list-group { list-style: none; display: flex; flex-direction: column; }
     .news-item-row { display: flex; gap: 15px; padding: 18px 20px; border-bottom: 1px solid #edf2f7; align-items: center; transition: background 0.2s; }
@@ -118,7 +109,6 @@
     .news-info-side h5 { font-size: 0.95rem; color: #333; font-weight: 600; line-height: 1.4; transition: color 0.2s; }
     .news-item-row:hover h5 { color: var(--suny-red); }
 
-    /* 학과 공지사항 Top 5 Container */
     .notice-container { background: white; padding: 10px 20px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border-top: 5px solid var(--suny-navy); display: flex; flex-direction: column; }
     .notice-list-group { list-style: none; display: flex; flex-direction: column; }
     .notice-item { border-bottom: 1px solid #edf2f7; padding: 16px 0; display: flex; flex-direction: column; gap: 6px; transition: background 0.2s; }
@@ -130,7 +120,6 @@
     .notice-item h5 { font-size: 0.95rem; color: #333; font-weight: 600; transition: color 0.2s; }
     .notice-item:hover h5 { color: var(--suny-red); }
 
-    /* Schedule Section */
     .bottom-calendar-section { max-width: 1200px; margin: 40px auto 80px auto; padding: 0 20px; clear: both; }
     .calendar-card { display: grid; grid-template-columns: 2.2fr 0.8fr; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.08); border-left: 6px solid var(--suny-red); }
     
@@ -153,7 +142,6 @@
     .calendar-day.has-univ-event:hover { background: var(--suny-navy); color: white; }
     .calendar-day:hover::after { background: white !important; }
 
-    /* 일정 팝업 툴팁 */
     .calendar-day .tooltip-box {
         visibility: hidden;
         width: 240px;
@@ -179,7 +167,6 @@
     }
     .calendar-day:hover .tooltip-box { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(-2px); }
 
-    /* 우측 메모 노트 스타일 */
     .calendar-preview-side { background: #fefcf0; padding: 40px 25px; border-left: 1px dashed #eadea6; display: flex; flex-direction: column; position: relative; }
     .calendar-preview-side::before { content: '📌'; position: absolute; top: 15px; right: 15px; font-size: 1.1rem; }
     .calendar-preview-side h4 { color: #5c5230; font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; border-bottom: 1px solid #eadea6; padding-bottom: 8px; }
@@ -192,7 +179,6 @@
 
     footer { background: #1a1a1a; color: #ccc; text-align: center; padding: 40px 20px; margin-top: 100px; }
 
-    /* 반응형 제어 */
     @media (max-width: 950px) {
         .content-split { grid-template-columns: 1fr; gap: 30px; }
         .calendar-card { grid-template-columns: 1fr; }
@@ -313,35 +299,35 @@
                         <div class="news-thumb-mini"></div>
                         <div class="news-info-side">
                             <span class="news-meta-date">MAY 28, 2026</span>
-                            <h5>TS Faculty Wins Global Tech Policy Grant for Ethical AI Research</h5>
+                            <h5>DTS Students Take Grand Prize at Hackathon "The X 2026" with Innovative Offline Security App</h5>
                         </div>
                     </li>
                     <li class="news-item-row" onclick="location.href='news-post2.html'">
                         <div class="news-thumb-mini"></div>
                         <div class="news-info-side">
                             <span class="news-meta-date">MAY 15, 2026</span>
-                            <h5>2026 TS Spring Symposium: Technology for Sustainable Development Goals</h5>
+                            <h5>Dongchan Kim Won Final Grand Prize at MIT Reality Hack</h5>
                         </div>
                     </li>
                     <li class="news-item-row" onclick="location.href='news-post3.html'">
                         <div class="news-thumb-mini"></div>
                         <div class="news-info-side">
                             <span class="news-meta-date">APR 30, 2026</span>
-                            <h5>Undergraduate Research Group Selected for National ICT Exhibit</h5>
+                            <h5>Professor Neal Dreamson named a Top Scholar (0.5%) by ScholarGPS</h5>
                         </div>
                     </li>
                     <li class="news-item-row" onclick="location.href='news-post4.html'">
                         <div class="news-thumb-mini"></div>
                         <div class="news-info-side">
                             <span class="news-meta-date">APR 12, 2026</span>
-                            <h5>Alumni Spotlight: Career Paths in Digital Transformation & Public Policy</h5>
+                            <h5>Prof. Anthony Pennings Explores AI and Remote Sensing Solutions for Landslides and Flooding at 2024 UN Public Service Forum</h5>
                         </div>
                     </li>
                     <li class="news-item-row" onclick="location.href='news-post5.html'">
                         <div class="news-thumb-mini"></div>
                         <div class="news-info-side">
                             <span class="news-meta-date">MAR 24, 2026</span>
-                            <h5>Welcoming New Faculty Members to the TS Department This Fall</h5>
+                            <h5>Dr. Sangchan Park Honored with 'Service The Prime Award' at Korea Service Grand Prix 2024</h5>
                         </div>
                     </li>
                 </ul>
@@ -354,38 +340,38 @@
                 <ul class="notice-list-group">
                     <li class="notice-item" onclick="location.href='notice-post1.html'" style="cursor:pointer;">
                         <div class="notice-tag-row">
-                            <span class="notice-badge urgent">Urgent</span>
+                            <span class="notice-badge">Graduate School</span>
                             <span class="notice-item-date">Jun 02, 2026</span>
                         </div>
-                        <h5>[Undergrad] 2026 Fall Course Registration & Tuition Payment Deadline</h5>
+                        <h5>Accelerated BSMS Program Information Session</h5>
                     </li>
                     <li class="notice-item" onclick="location.href='notice-post2.html'" style="cursor:pointer;">
                         <div class="notice-tag-row">
-                            <span class="notice-badge">Scholarship</span>
+                            <span class="notice-badge">Graduate School</span>
                             <span class="notice-item-date">May 29, 2026</span>
                         </div>
-                        <h5>TS Department Global Leader Scholarship Application Open</h5>
+                        <h5>Graduate Info Session</h5>
                     </li>
                     <li class="notice-item" onclick="location.href='notice-post3.html'" style="cursor:pointer;">
                         <div class="notice-tag-row">
-                            <span class="notice-badge">Event</span>
+                            <span class="notice-badge">Policy</span>
                             <span class="notice-item-date">May 24, 2026</span>
                         </div>
-                        <h5>2026 Tech-Industry Internship Recruiting Information Session</h5>
+                        <h5>New Departmental Policy for ESE 123 Enrollment</h5>
                     </li>
                     <li class="notice-item" onclick="location.href='notice-post4.html'" style="cursor:pointer;">
                         <div class="notice-tag-row">
-                            <span class="notice-badge">Graduation</span>
+                            <span class="notice-badge">Advising</span>
                             <span class="notice-item-date">May 10, 2026</span>
                         </div>
-                        <h5>Important Checklist and Dissertation Submission for Summer 2026 Graduation</h5>
+                        <h5>Mandatory Academic Advising Guide for SBU Visiting Students FA26 - SP27</h5>
                     </li>
                     <li class="notice-item" onclick="location.href='notice-post5.html'" style="cursor:pointer;">
                         <div class="notice-tag-row">
                             <span class="notice-badge">Advising</span>
                             <span class="notice-item-date">Apr 18, 2026</span>
                         </div>
-                        <h5>Mandatory Academic Advising Guide for Freshmen & Sophomores</h5>
+                        <h5>Mandatory Academic Advising Guide for Seniors</h5>
                     </li>
                 </ul>
             </div>
@@ -398,7 +384,7 @@
             
             <div class="calendar-body-side">
                 <div class="calendar-header">
-                    <h3>September 2026</h3>
+                    <h3>August 2026</h3>
                     <span style="font-size: 0.8rem; color: #888;">*Hover marked days to check events</span>
                 </div>
                 <div class="calendar-grid">
@@ -430,19 +416,19 @@
             </div>
 
             <div class="calendar-preview-side">
-                <h4>September Note</h4>
+                <h4>August Note</h4>
                 <ul class="preview-list">
                     <li class="preview-item">
-                        <span class="preview-date-badge">Sep 01</span>
+                        <span class="preview-date-badge">Aug 27</span>
+                        <h5>[Univ] Fall Semester NSWW</h5>
+                    </li>
+                    <li class="preview-item">
+                        <span class="preview-date-badge">Aug 28</span>
                         <h5>[Univ] Fall Semester Begins</h5>
                     </li>
                     <li class="preview-item">
-                        <span class="preview-date-badge">Sep 11</span>
-                        <h5>[Univ] Course Add/Drop Deadline</h5>
-                    </li>
-                    <li class="preview-item">
-                        <span class="preview-date-badge dept">Sep 22</span>
-                        <h5>[TS] Course Clearance Check</h5>
+                        <span class="preview-date-badge dept">Sep 11</span>
+                        <h5>[TS] Course Add & Drop Period Deadline</h5>
                     </li>
                 </ul>
             </div>

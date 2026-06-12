@@ -66,7 +66,6 @@ const commonMenuHTML = `
     </div>
 `;
 
-// 페이지 로드 시 menu-container 자리에 위 HTML을 자동으로 주입해주는 함수
 document.addEventListener("DOMContentLoaded", function() {
     const menuContainer = document.getElementById("menu-container");
     if (menuContainer) {

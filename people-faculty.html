@@ -27,7 +27,6 @@
     .more-toggle-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 2001; }
     .more-toggle-btn span { width: 24px; height: 3px; background-color: var(--suny-navy); border-radius: 2px; }
 
-    /* 드로어 스타일 */
     .nav-drawer { position: fixed; top: 0; right: -380px; width: 380px; height: 100%; background: #ffffff; box-shadow: -5px 0 25px rgba(0,0,0,0.15); transition: right 0.4s ease; z-index: 2000; padding: 80px 30px 40px 30px; overflow-y: auto; }
     .nav-drawer.open { right: 0; }
     .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 1999; }
@@ -47,7 +46,6 @@
 
     .sub-page-container { max-width: 1240px; margin: 60px auto; padding: 0 20px; display: flex; gap: 50px; align-items: flex-start; }
 
-    /* 좌측 사이드바 */
     .left-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 110px; }
     .left-sidebar h2 { font-size: 1.8rem; color: var(--suny-navy); padding-bottom: 15px; border-bottom: 2px solid var(--suny-navy); margin-bottom: 15px; font-weight: bold; }
     .left-sidebar ul { list-style: none; }
@@ -55,7 +53,6 @@
     .left-sidebar li a:hover { background-color: #f8f9fa; color: var(--suny-red); }
     .left-sidebar li a.active { background-color: var(--sidebar-active-blue); color: white !important; font-weight: bold; }
 
-    /* 우측 콘텐츠 */
     .sub-page-wrapper { flex-grow: 1; min-height: 600px; width: 0; }
     .breadcrumb-top { display: flex; justify-content: flex-end; font-size: 0.85rem; color: #666; margin-bottom: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
 
@@ -65,21 +62,18 @@
     
     .faculty-container { background: white; padding: 50px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
 
-    /* 상단 선택 탭 바 (반반 분할) */
     .faculty-tab-nav { display: flex; width: 100%; border-bottom: 2px solid #cbd5e1; margin-bottom: 30px; gap: 5px; }
     .faculty-tab-btn { flex: 1; padding: 15px 20px; font-size: 1.05rem; font-weight: bold; color: #64748b; background: #f8fafc; border: 1px solid #e2e8f0; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; transition: all 0.2s ease; margin-bottom: -2px; text-align: center; }
     .faculty-tab-btn:hover { color: var(--suny-red); background: #fff; }
     .faculty-tab-btn.active { color: white; background-color: var(--suny-navy); border-color: var(--suny-navy); }
     .faculty-tab-btn.active.sbu-active { background-color: var(--suny-red); border-color: var(--suny-red); }
-    
-    /* 우측 정렬된 검색창 바 */
+
     .faculty-search-bar { background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 15px 20px; display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 30px; border-radius: 6px; }
     .search-select { padding: 6px 12px; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 4px; background: #fff; }
     .search-input { padding: 6px 12px; font-size: 0.85rem; border: 1px solid #cbd5e1; border-radius: 4px; width: 220px; outline: none; }
     .search-submit-btn { background-color: var(--suny-navy); color: white; border: none; padding: 6px 18px; font-size: 0.85rem; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
     .search-submit-btn:hover { background-color: var(--suny-red); }
 
-    /* 교수 리스트 컴포넌트 */
     .faculty-list { display: flex; flex-direction: column; }
     .faculty-card { display: flex; gap: 30px; padding: 35px 0; border-bottom: 1px dotted #cbd5e1; align-items: flex-start; transition: opacity 0.2s ease; }
     .faculty-card.hidden { display: none !important; } 
@@ -91,8 +85,7 @@
     .faculty-info { flex-grow: 1; }
     .faculty-info .name { font-size: 1.35rem; color: var(--sidebar-active-blue); font-weight: 700; margin-bottom: 12px; display: inline-block; }
     .faculty-info .name:hover { text-decoration: underline; color: var(--suny-red); }
-    
-    /* 소속 표시 배지 디자인 */
+
     .faculty-badge { display: inline-block; padding: 3px 8px; font-size: 0.72rem; font-weight: bold; border-radius: 4px; margin-left: 10px; vertical-align: middle; }
     .badge-suny { background-color: #e2e8f0; color: var(--suny-navy); }
     .badge-sbu { background-color: #fee2e2; color: var(--suny-red); }
@@ -182,7 +175,7 @@
                             <div class="faculty-description">
                                 Visual analytics, explainable machine learning and AI, algorithmic fairness and transparency, data science and computational and medical imaging.
                             </div>
-                    </div></div> '''
+                    </div></div> 
 
                     <div class="faculty-card" data-type="sbu">
                         <div class="faculty-photo-box">
@@ -203,7 +196,7 @@
                             <div class="photo-placeholder">Lori Scarlatos<br>PHOTO</div>
                         </div>
                         <div class="faculty-info">
-                            <a href="#" class="name">Lori Scarlatos <span class="faculty-badge badge-suny">SUNY Korea</span></a>
+                            <a href="#" class="name">Lori Scarlatos <span class="faculty-badge badge-sbu">SUNY Korea</span></a>
                             <div class="info-row"><strong>Title:</strong> <span>Graduate Program Director, Associate Professor</span></div>
                             <div class="info-row"><strong>Email:</strong> <a href="mailto:lori.scarlatos@stonybrook.edu">lori.scarlatos@stonybrook.edu</a></div>
                             <div class="faculty-description">
@@ -508,7 +501,6 @@
     <script src="menu.js"></script>
 
     <script>
-        // 공통 UI 드로어 제어용
         function toggleDrawer() {
             document.getElementById('navDrawer').classList.toggle('open');
             document.getElementById('drawerOverlay').classList.toggle('show');
@@ -517,16 +509,12 @@
             element.parentElement.classList.toggle('active');
         }
 
-        // =======================================================
-        // ★ 초기 로드 및 연동 필터링 스크립트 수정본
-        // =======================================================
-        let currentTabType = 'suny'; // 기본 선택값을 'suny'로 지정하여 시작함
+        let currentTabType = 'suny';
         
         const nameInput = document.getElementById('facultySearchInput');
         const cards = document.querySelectorAll('.faculty-card');
         const noResults = document.getElementById('noResultsMessage');
 
-        // 탭 토글 처리 함수
         function switchTab(type, buttonElement) {
             const buttons = document.querySelectorAll('.faculty-tab-btn');
             buttons.forEach(btn => {
@@ -543,7 +531,6 @@
             filterFaculty();
         }
 
-        // 필터링 메인 Logic
         function filterFaculty() {
             const searchKeyword = nameInput.value.toLowerCase().trim();
             let showCount = 0;
@@ -552,7 +539,6 @@
                 const cardType = card.getAttribute('data-type');
                 const profName = card.querySelector('.name').textContent.toLowerCase();
 
-                // 탭 소속 조건 및 인풋 키워드 매칭 연동
                 const matchClass = (cardType === currentTabType);
                 const matchKeyword = (searchKeyword === '' || profName.includes(searchKeyword));
 
@@ -564,7 +550,6 @@
                 }
             });
 
-            // 결과 건수 메일 알림창 제어
             if (showCount === 0) {
                 noResults.style.display = 'block';
             } else {
@@ -572,14 +557,12 @@
             }
         }
 
-        // 엔터키 연동
         nameInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 filterFaculty();
             }
         });
 
-        // ★ 페이지 최초 로드 시 자동으로 SUNY Korea 교수진만 먼저 활성화 노출 처리
         window.addEventListener('DOMContentLoaded', () => {
             filterFaculty();
         });

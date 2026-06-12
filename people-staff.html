@@ -35,7 +35,6 @@
 
     .sub-page-container { max-width: 1240px; margin: 60px auto; padding: 0 20px; display: flex; gap: 50px; align-items: flex-start; }
 
-    /* 좌측 사이드바 */
     .left-sidebar { width: 240px; flex-shrink: 0; position: sticky; top: 110px; }
     .left-sidebar h2 { font-size: 1.8rem; color: var(--suny-navy); padding-bottom: 15px; border-bottom: 2px solid var(--suny-navy); margin-bottom: 15px; font-weight: bold; }
     .left-sidebar ul { list-style: none; }
@@ -43,7 +42,6 @@
     .left-sidebar li a:hover { background-color: #f8f9fa; color: var(--suny-red); }
     .left-sidebar li a.active { background-color: var(--sidebar-active-blue); color: white !important; font-weight: bold; }
 
-    /* 우측 콘텐츠 */
     .sub-page-wrapper { flex-grow: 1; min-height: 600px; width: 0; }
     .breadcrumb-top { display: flex; justify-content: flex-end; font-size: 0.85rem; color: #666; margin-bottom: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
 
@@ -51,26 +49,20 @@
     .sub-page-header h2 { font-size: 2.2rem; color: var(--suny-navy); }
     .sub-page-header p { color: var(--suny-red); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; margin-top: 5px; }
     
-    /* Staff 전용 컴포넌트 */
     .staff-container { background: white; padding: 60px 50px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
 
-    /* 상단 인용구 스타일 */
     .staff-quote-box { text-align: center; margin-bottom: 50px; position: relative; padding: 0 40px; }
     .staff-quote-box h3 { font-size: 1.8rem; color: #333; font-weight: 700; line-height: 1.4; display: inline; word-break: keep-all; }
     
-    /* 큰따옴표 장식 기호 */
     .quote-mark { font-size: 3rem; color: #ccc; font-family: 'Georgia', serif; position: absolute; top: -20px; line-height: 1; }
     .quote-left { left: 0; }
     .quote-right { right: 0; }
 
-    /* 하단 회색 정보 박스 */
     .staff-info-card { background-color: #f8fafc; border-radius: 8px; padding: 40px 50px; display: flex; align-items: center; gap: 40px; }
     
-    /* 원형 프로필 아이콘 박스 */
     .staff-avatar-box { width: 90px; height: 90px; background-color: #f1f5f9; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .staff-avatar-box svg { width: 40px; height: 40px; fill: #475569; }
 
-    /* 상세 리스트 */
     .staff-details { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 1.05rem; color: #333; }
     .staff-details li { position: relative; padding-left: 15px; }
     .staff-details li::before { content: "•"; position: absolute; left: 0; color: #333; }
@@ -78,9 +70,6 @@
     .staff-details a { color: #333; transition: color 0.2s; }
     .staff-details a:hover { color: var(--suny-red); text-decoration: underline; }
 
-    /* -------------------------------------------
-        ★ menu.js 드로어 메뉴창 정상 구동 CSS 추가
-    -------------------------------------------- */
     .drawer-overlay {
         position: fixed;
         top: 0;
