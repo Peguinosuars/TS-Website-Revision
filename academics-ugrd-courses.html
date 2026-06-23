@@ -52,7 +52,7 @@
 
     .accordion-item.open .accordion-header { background-color: #edf2f7; color: var(--suny-navy); }
     .accordion-item.open .accordion-header span { transform: rotate(180deg); }
-    .accordion-item.open .accordion-content { max-height: 200px; }
+    .accordion-item.open .accordion-content { max-height: 250px; }
 
     .sub-page-wrapper { flex-grow: 1; min-height: 600px; width: 0; }
     .breadcrumb-top { display: flex; justify-content: flex-end; font-size: 0.85rem; color: #666; margin-bottom: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
@@ -65,6 +65,14 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
+    /* Catalog Page Custom Styles */
+    .catalog-download-container { display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; margin-top: 20px; }
+    .catalog-info h3 { font-size: 1.25rem; color: var(--suny-navy); margin-bottom: 5px; font-weight: bold; }
+    .catalog-info p { font-size: 0.95rem; color: #64748b; }
+    .download-btn { background-color: var(--suny-red); color: white !important; font-weight: bold; padding: 12px 24px; border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .download-btn:hover { background-color: #b91c1c; }
+
+    /* Milestones Page Custom Styles */
     .section-title { font-size: 1.5rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; }
     .overview-table { width: 100%; border-collapse: collapse; margin-bottom: 35px; background: #fff; border: 1px solid #cbd5e1; }
     .overview-table th { background: var(--suny-navy); color: #fff; padding: 12px; font-weight: 700; text-align: center; border: 1px solid var(--suny-navy); width: 50%; }
@@ -81,6 +89,7 @@
     .notes-box ul { list-style-type: square; padding-left: 20px; }
     .notes-box li { font-size: 0.95rem; color: #4a5568; margin-bottom: 6px; }
 
+    /* Courses Page Custom Styles */
     .course-section h3 { font-size: 1.4rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 8px; }
     .course-section > p { font-size: 0.95rem; color: #555; margin-bottom: 25px; }
     .course-accordion { display: flex; flex-direction: column; gap: 15px; }
@@ -91,14 +100,15 @@
     .course-code { background-color: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
     .course-title { font-size: 1rem; font-weight: 700; color: var(--suny-navy); }
     .course-arrow { font-size: 0.75rem; color: #64748b; transition: transform 0.3s; }
-    .course-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: #ffffff; }
-    .course-item.active { border-color: #cbd5e1; }
-    .course-item.active .course-arrow { transform: rotate(180deg); }
+    
+    .course-body { display: none; background: #ffffff; }
+    .course-item.active .course-body { display: block; }
     .course-content-inner { padding: 20px; border-top: 1px solid #e2e8f0; }
     .course-image-box { width: 100%; max-height: 320px; margin-bottom: 15px; border-radius: 6px; overflow: hidden; }
     .course-image-box img { width: 100%; height: auto; object-fit: cover; display: block; }
     .course-description { font-size: 0.95rem; color: #4a5568; }
 
+    /* Nav Drawer Settings */
     .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 2000; display: none; }
     .drawer-overlay.show { display: block; }
     
@@ -152,14 +162,9 @@
             <h3 onclick="toggleDrawerAccordion(this)">Academics <span>▼</span></h3>
             <ul class="drawer-sub-menu">
                 <li><a onclick="switchTab('ugrd-program'); toggleDrawer();">Undergraduate Program</a></li>
+                <li><a onclick="switchTab('ugrd-catalog'); toggleDrawer();">Undergraduate Catalog</a></li>
                 <li><a onclick="switchTab('ugrd-milestones'); toggleDrawer();">Undergraduate Milestones</a></li>
                 <li><a onclick="switchTab('ugrd-courses'); toggleDrawer();">Undergraduate Courses</a></li>
-            </ul>
-        </div>
-        <div class="menu-category">
-            <h3 onclick="toggleDrawerAccordion(this)">Admission <span>▼</span></h3>
-            <ul class="drawer-sub-menu">
-                <li><a onclick="alert('Redirecting...'); toggleDrawer();">Apply Now</a></li>
             </ul>
         </div>
     </div>
@@ -182,29 +187,35 @@
                         <li><a onclick="switchTab('ugrd-courses')" data-target="ugrd-courses">Courses</a></li>
                     </ul>
                 </li>
-                <li class="accordion-item" id="grd-item">
-                    <div class="accordion-header" onclick="toggleSidebarMenu('grd-item')">
-                        Graduate (GRD) <span>▼</span>
-                    </div>
-                    <ul class="accordion-content">
-                        <li><a onclick="switchTab('grd-program')" data-target="grd-program">Program</a></li>
-                        <li><a onclick="switchTab('grd-catalog')" data-target="grd-catalog">Catalog</a></li>
-                        <li><a onclick="switchTab('grd-milestones')" data-target="grd-milestones">Milestones</a></li>
-                        <li><a onclick="switchTab('grd-courses')" data-target="grd-courses">Courses</a></li>
-                    </ul>
-                </li>
             </ul>
         </nav>
 
         <div class="sub-page-wrapper">
+            <div class="breadcrumb-top" id="breadcrumbText">ACADEMICS > UGRD > PROGRAM</div>
+            <div class="sub-page-header"><h2 id="mainPageTitle">Undergraduate Program</h2></div>
+
             <div class="content-container">
                 
                 <div id="ugrd-program-content" class="tab-content active" data-title="Undergraduate Program" data-breadcrumb="ACADEMICS > UGRD > PROGRAM">
-                    <p>Program details will be loaded here.</p>
+                    <p style="font-size: 1.05rem; color: #334155; margin-bottom: 20px;">
+                        The Undergraduate Program in Technological Systems Management provides students with a unique interdisciplinary foundation. The program focuses on understanding, assessing, and managing technology effectively within societal frameworks, preparing students for innovative leadership across diverse technology sectors.
+                    </p>
+                    <p style="font-size: 1.05rem; color: #334155;">
+                        Through rigorous hands-on coursework, foundational engineering design concepts, and advanced research projects, students explore complex modern challenges such as sustainable technology, system planning, and technical communication.
+                    </p>
                 </div>
 
                 <div id="ugrd-catalog-content" class="tab-content" data-title="Undergraduate Catalog" data-breadcrumb="ACADEMICS > UGRD > CATALOG">
-                    <p>Catalog details will be loaded here.</p>
+                    <p style="font-size: 1.05rem; color: #334155; margin-bottom: 25px;">
+                        The undergraduate academic catalog outlines standard academic policies, department degree requirements, credit allocation procedures, and the entire repository of undergraduate learning paths available at the university.
+                    </p>
+                    <div class="catalog-download-container">
+                        <div class="catalog-info">
+                            <h3>2025-2026 Undergraduate Official Catalog</h3>
+                            <p>PDF Format • Comprehensive Policy and Curriculum Documentation</p>
+                        </div>
+                        <a href="#" target="_blank" class="download-btn">📥 Download PDF</a>
+                    </div>
                 </div>
 
                 <div id="ugrd-milestones-content" class="tab-content" data-title="Undergraduate Milestones" data-breadcrumb="ACADEMICS > UGRD > MILESTONES">
@@ -253,6 +264,7 @@
                         <h3>Department Course List</h3>
                         <p>Click on each course below to view the detailed description and visual overview.</p>
                         <div class="course-accordion">
+                            
                             <div class="course-item">
                                 <button class="course-header" onclick="toggleCourseAccordion(this)">
                                     <div class="course-header-left">
@@ -270,14 +282,10 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-
-                <div id="grd-program-content" class="tab-content" data-title="Graduate Program" data-breadcrumb="ACADEMICS > GRD > PROGRAM"><h3>Graduate Program Content</h3><p>Graduate data track.</p></div>
-                <div id="grd-catalog-content" class="tab-content" data-title="Graduate Catalog" data-breadcrumb="ACADEMICS > GRD > CATALOG"><h3>Graduate Catalog Content</h3><p>Graduate requirements listing.</p></div>
-                <div id="grd-milestones-content" class="tab-content" data-title="Graduate Milestones" data-breadcrumb="ACADEMICS > GRD > MILESTONES"><h3>Graduate Milestones Content</h3><p>Thesis review checkpoints.</p></div>
-                <div id="grd-courses-content" class="tab-content" data-title="Graduate Courses" data-breadcrumb="ACADEMICS > GRD > COURSES"><h3>Graduate Courses Content</h3><p>Seminar details.</p></div>
 
             </div> 
         </div> 
@@ -286,15 +294,7 @@
     <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
 
     <script>
-        // 초기 로드 시 메인 타이틀과 브레드크럼 틀을 sub-page-wrapper 내부 맨 위에 생성합니다.
-        const wrapper = document.querySelector('.sub-page-wrapper');
-        const headerDiv = document.createElement('div');
-        headerDiv.innerHTML = `
-            <div class="breadcrumb-top" id="breadcrumbText"></div>
-            <div class="sub-page-header"><h2 id="mainPageTitle"></h2></div>
-        `;
-        wrapper.insertBefore(headerDiv, wrapper.firstChild);
-
+        // 1. 탭 전환 제어 함수
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
@@ -303,7 +303,7 @@
             if (activeContent) {
                 activeContent.classList.add('active');
                 
-                // 각 탭 고유의 data 속성값에서 원래 텍스트를 정확하게 추출해 상단 헤더에 주입합니다.
+                // 각 탭에 주입되어 있는 고유 데이터 타이틀 변경 처리
                 const originalTitle = activeContent.getAttribute('data-title');
                 const originalBreadcrumb = activeContent.getAttribute('data-breadcrumb');
                 
@@ -318,36 +318,36 @@
             if (targetLink) targetLink.classList.add('active');
         }
 
-        // 페이지 최초 실행 시 초기 활성화 탭 세팅
-        window.addEventListener('DOMContentLoaded', () => {
-            switchTab('ugrd-program');
-        });
-
+        // 2. 사이드바 대분류 아코디언 토글 함수
         function toggleSidebarMenu(itemId) {
-            const allItems = document.querySelectorAll('.accordion-item');
-            allItems.forEach(item => {
-                if (item.id === itemId) {
-                    item.classList.toggle('open');
+            const item = document.getElementById(itemId);
+            if (item) {
+                item.classList.toggle('open');
+                const span = item.querySelector('.accordion-header span');
+                if (item.classList.contains('open')) {
+                    span.innerText = '▲';
                 } else {
-                    item.classList.remove('open');
+                    span.innerText = '▼';
                 }
-            });
-        }
-
-        function toggleCourseAccordion(button) {
-            const currentItem = button.parentElement;
-            const body = currentItem.querySelector('.course-body');
-            const isOpen = currentItem.classList.contains('active');
-            
-            if (!isOpen) {
-                currentItem.classList.add('active');
-                body.style.maxHeight = body.scrollHeight + "px";
-            } else {
-                currentItem.classList.remove('active');
-                body.style.maxHeight = null;
             }
         }
 
+        // 3. Courses 전용 독립형 토글 함수 (충돌 완전 해결)
+        function toggleCourseAccordion(button) {
+            const currentItem = button.closest('.course-item');
+            if (!currentItem) return;
+            
+            currentItem.classList.toggle('active');
+            const arrow = currentItem.querySelector('.course-arrow');
+            
+            if (currentItem.classList.contains('active')) {
+                if(arrow) arrow.innerText = '▲';
+            } else {
+                if(arrow) arrow.innerText = '▼';
+            }
+        }
+
+        // 4. 모바일 우측 서랍장 기능
         function toggleDrawer() {
             const drawer = document.getElementById('navDrawer');
             const overlay = document.getElementById('drawerOverlay');
