@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academic Milestones - Technology and Society</title>
+<title>Academic Program - Technology and Society</title>
 <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background-color: #f4f6f8; color: #333; line-height: 1.6; overflow-x: hidden; }
@@ -131,7 +131,7 @@
 
     <header>
         <div class="logo-container">
-            <a onclick="switchTab('ugrd-courses')">
+            <a onclick="switchTab('ugrd-program')">
                 <div style="height: 50px; width: 250px; background: #e0e0e0; border: 2px dashed #999; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: #555; font-weight: bold; border-radius: 4px;">LOGO IMAGE PLACEHOLDER</div>
             </a>
         </div>
@@ -176,9 +176,9 @@
                         Undergraduate (UGRD) <span>▲</span>
                     </div>
                     <ul class="accordion-content">
-                        <li><a onclick="switchTab('ugrd-program')" data-target="ugrd-program">Program</a></li>
+                        <li><a onclick="switchTab('ugrd-program')" data-target="ugrd-program" class="active">Program</a></li>
                         <li><a onclick="switchTab('ugrd-catalog')" data-target="ugrd-catalog">Catalog</a></li>
-                        <li><a onclick="switchTab('ugrd-milestones')" data-target="ugrd-milestones" class="active">Milestones</a></li>
+                        <li><a onclick="switchTab('ugrd-milestones')" data-target="ugrd-milestones">Milestones</a></li>
                         <li><a onclick="switchTab('ugrd-courses')" data-target="ugrd-courses">Courses</a></li>
                     </ul>
                 </li>
@@ -197,15 +197,17 @@
         </nav>
 
         <div class="sub-page-wrapper">
-            <div class="breadcrumb-top" id="breadcrumbText">ACADEMICS > UGRD > MILESTONES</div>
-
-            <div class="sub-page-header">
-                <h2 id="mainPageTitle">Undergraduate Milestones</h2>
-            </div>
-
             <div class="content-container">
                 
-                <div id="ugrd-milestones-content" class="tab-content active">
+                <div id="ugrd-program-content" class="tab-content active" data-title="Undergraduate Program" data-breadcrumb="ACADEMICS > UGRD > PROGRAM">
+                    <p>Program details will be loaded here.</p>
+                </div>
+
+                <div id="ugrd-catalog-content" class="tab-content" data-title="Undergraduate Catalog" data-breadcrumb="ACADEMICS > UGRD > CATALOG">
+                    <p>Catalog details will be loaded here.</p>
+                </div>
+
+                <div id="ugrd-milestones-content" class="tab-content" data-title="Undergraduate Milestones" data-breadcrumb="ACADEMICS > UGRD > MILESTONES">
                     <div class="section-title">Degree Progress Milestones</div>
                     
                     <table class="overview-table">
@@ -246,7 +248,7 @@
                     </div>
                 </div>
 
-                <div id="ugrd-courses-content" class="tab-content">
+                <div id="ugrd-courses-content" class="tab-content" data-title="Undergraduate Courses" data-breadcrumb="ACADEMICS > UGRD > COURSES">
                     <div class="course-section">
                         <h3>Department Course List</h3>
                         <p>Click on each course below to view the detailed description and visual overview.</p>
@@ -272,41 +274,54 @@
                     </div>
                 </div>
 
-                <div id="ugrd-program-content" class="tab-content"><h3>Undergraduate Program Content</h3><p>Program details will be loaded here.</p></div>
-                <div id="ugrd-catalog-content" class="tab-content"><h3>Undergraduate Catalog Content</h3><p>Catalog details will be loaded here.</p></div>
-                <div id="grd-program-content" class="tab-content"><h3>Graduate Program Content</h3><p>Graduate data track.</p></div>
-                <div id="grd-catalog-content" class="tab-content"><h3>Graduate Catalog Content</h3><p>Graduate requirements listing.</p></div>
-                <div id="grd-milestones-content" class="tab-content"><h3>Graduate Milestones Content</h3><p>Thesis review checkpoints.</p></div>
-                <div id="grd-courses-content" class="tab-content"><h3>Graduate Courses Content</h3><p>Seminar details.</p></div>
+                <div id="grd-program-content" class="tab-content" data-title="Graduate Program" data-breadcrumb="ACADEMICS > GRD > PROGRAM"><h3>Graduate Program Content</h3><p>Graduate data track.</p></div>
+                <div id="grd-catalog-content" class="tab-content" data-title="Graduate Catalog" data-breadcrumb="ACADEMICS > GRD > CATALOG"><h3>Graduate Catalog Content</h3><p>Graduate requirements listing.</p></div>
+                <div id="grd-milestones-content" class="tab-content" data-title="Graduate Milestones" data-breadcrumb="ACADEMICS > GRD > MILESTONES"><h3>Graduate Milestones Content</h3><p>Thesis review checkpoints.</p></div>
+                <div id="grd-courses-content" class="tab-content" data-title="Graduate Courses" data-breadcrumb="ACADEMICS > GRD > COURSES"><h3>Graduate Courses Content</h3><p>Seminar details.</p></div>
 
-            </div> </div> </div> <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
+            </div> 
+        </div> 
+    </div> 
+    
+    <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
 
     <script>
+        // 초기 로드 시 메인 타이틀과 브레드크럼 틀을 sub-page-wrapper 내부 맨 위에 생성합니다.
+        const wrapper = document.querySelector('.sub-page-wrapper');
+        const headerDiv = document.createElement('div');
+        headerDiv.innerHTML = `
+            <div class="breadcrumb-top" id="breadcrumbText"></div>
+            <div class="sub-page-header"><h2 id="mainPageTitle"></h2></div>
+        `;
+        wrapper.insertBefore(headerDiv, wrapper.firstChild);
+
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
             
             const activeContent = document.getElementById(tabId + '-content');
-            if (activeContent) activeContent.classList.add('active');
+            if (activeContent) {
+                activeContent.classList.add('active');
+                
+                // 각 탭 고유의 data 속성값에서 원래 텍스트를 정확하게 추출해 상단 헤더에 주입합니다.
+                const originalTitle = activeContent.getAttribute('data-title');
+                const originalBreadcrumb = activeContent.getAttribute('data-breadcrumb');
+                
+                document.getElementById('mainPageTitle').innerText = originalTitle || "";
+                document.getElementById('breadcrumbText').innerText = originalBreadcrumb || "";
+            }
             
             const sidebarLinks = document.querySelectorAll('.accordion-content li a');
             sidebarLinks.forEach(link => link.classList.remove('active'));
             
             const targetLink = document.querySelector(`[data-target="${tabId}"]`);
-            if (targetLink) {
-                targetLink.classList.add('active');
-                
-                // [안전한 수정] 단어를 잘라서 유추하지 않고, 메뉴에 등록된 정식 명칭을 가져와 타이틀로 사용합니다.
-                const isGrd = tabId.startsWith('grd');
-                const typeText = isGrd ? 'Graduate' : 'Undergraduate';
-                const shortType = isGrd ? 'GRD' : 'UGRD';
-                const menuText = targetLink.innerText; 
-                const pageName = tabId.split('-')[1].toUpperCase();
-                
-                document.getElementById('mainPageTitle').innerText = `${typeText} ${menuText}`;
-                document.getElementById('breadcrumbText').innerText = `ACADEMICS > ${shortType} > ${pageName}`;
-            }
+            if (targetLink) targetLink.classList.add('active');
         }
+
+        // 페이지 최초 실행 시 초기 활성화 탭 세팅
+        window.addEventListener('DOMContentLoaded', () => {
+            switchTab('ugrd-program');
+        });
 
         function toggleSidebarMenu(itemId) {
             const allItems = document.querySelectorAll('.accordion-item');
