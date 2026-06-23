@@ -293,15 +293,19 @@
             sidebarLinks.forEach(link => link.classList.remove('active'));
             
             const targetLink = document.querySelector(`[data-target="${tabId}"]`);
-            if (targetLink) targetLink.classList.add('active');
-            
-            const isGrd = tabId.startsWith('grd');
-            const typeText = isGrd ? 'Graduate' : 'Undergraduate';
-            const shortType = isGrd ? 'GRD' : 'UGRD';
-            const pageName = tabId.split('-')[1].toUpperCase();
-            
-            document.getElementById('mainPageTitle').innerText = `${typeText} ${tabId.split('-')[1].charAt(0).toUpperCase() + tabId.split('-')[1].slice(1)}`;
-            document.getElementById('breadcrumbText').innerText = `ACADEMICS > ${shortType} > ${pageName}`;
+            if (targetLink) {
+                targetLink.classList.add('active');
+                
+                // [안전한 수정] 단어를 잘라서 유추하지 않고, 메뉴에 등록된 정식 명칭을 가져와 타이틀로 사용합니다.
+                const isGrd = tabId.startsWith('grd');
+                const typeText = isGrd ? 'Graduate' : 'Undergraduate';
+                const shortType = isGrd ? 'GRD' : 'UGRD';
+                const menuText = targetLink.innerText; 
+                const pageName = tabId.split('-')[1].toUpperCase();
+                
+                document.getElementById('mainPageTitle').innerText = `${typeText} ${menuText}`;
+                document.getElementById('breadcrumbText').innerText = `ACADEMICS > ${shortType} > ${pageName}`;
+            }
         }
 
         function toggleSidebarMenu(itemId) {
