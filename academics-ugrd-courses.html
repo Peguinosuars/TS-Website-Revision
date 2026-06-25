@@ -3,380 +3,217 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academic Program - Technology and Society</title>
+<title>Undergraduate Courses - Technology and Society</title>
 <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #f4f6f8; color: #333; line-height: 1.6; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; cursor: pointer; }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+    body{background:#f4f6f8;color:#333;line-height:1.6;overflow-x:hidden}
+    a{text-decoration:none;color:inherit;cursor:pointer}
+    :root{--suny-red:#990000;--suny-navy:#002244;--sidebar-active-blue:#004488}
+    header{background:#fff;padding:15px 50px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
+    .logo-container{display:flex;align-items:center;height:55px}
+    .nav-right-area{display:flex;align-items:center;gap:20px}
+    .search-tab{display:flex;align-items:center;background:#f0f2f5;padding:6px 12px;border-radius:20px;border:1px solid #e0e0e0}
+    .search-tab input{background:transparent;border:none;outline:none;font-size:.85rem;width:130px}
+    .search-tab button{background:none;border:none;font-size:.9rem;color:#666;margin-left:5px;cursor:pointer}
+    .more-toggle-btn{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:10px;z-index:2001}
+    .more-toggle-btn span{width:24px;height:3px;background:var(--suny-navy);border-radius:2px}
+    .sub-banner{background:linear-gradient(rgba(0,34,68,.4),rgba(0,34,68,.5)),url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;width:100%;height:350px}
+    .sub-page-container{max-width:1240px;margin:60px auto;padding:0 20px;display:flex;gap:50px;align-items:flex-start}
+    .left-sidebar{width:260px;flex-shrink:0;position:sticky;top:110px}
+    .left-sidebar h2{font-size:1.8rem;color:var(--suny-navy);padding-bottom:15px;border-bottom:2px solid var(--suny-navy);margin-bottom:15px;font-weight:bold}
+    .sidebar-accordion{list-style:none;display:flex;flex-direction:column;gap:5px}
+    .accordion-header{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:#fff;color:var(--suny-navy);font-weight:bold;font-size:1rem;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;transition:all .2s}
+    .accordion-header:hover{background:#f8f9fa;color:var(--suny-red)}
+    .accordion-header span{font-size:.8rem;transition:transform .3s}
+    .accordion-content{max-height:0;overflow:hidden;transition:max-height .3s ease-out;list-style:none;padding-left:10px}
+    .accordion-content li a{display:block;padding:10px 15px;color:#555;font-size:.9rem;font-weight:500;border-bottom:1px solid #edf2f7;transition:all .2s}
+    .accordion-content li a:hover{color:var(--suny-red);padding-left:20px}
+    .accordion-content li a.active{color:var(--sidebar-active-blue);font-weight:bold}
+    .accordion-content li a.active::before{content:'• ';color:var(--sidebar-active-blue)}
+    .accordion-item.open .accordion-header{background:#edf2f7;color:var(--suny-navy)}
+    .accordion-item.open .accordion-header span{transform:rotate(180deg)}
+    .accordion-item.open .accordion-content{max-height:220px}
+    .sub-page-wrapper{flex-grow:1;min-height:600px;width:0}
+    .breadcrumb-top{display:flex;justify-content:flex-end;font-size:.85rem;color:#666;margin-bottom:10px;text-transform:uppercase;font-weight:600;letter-spacing:.5px}
+    .sub-page-header{margin-bottom:40px;border-bottom:3px solid var(--suny-red);padding-bottom:15px}
+    .sub-page-header h2{font-size:2.2rem;color:var(--suny-navy);font-weight:700}
+    .content-container{background:#fff;padding:50px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+    .section-title{font-size:1.5rem;color:var(--suny-navy);font-weight:700;margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid #e2e8f0;text-transform:uppercase;letter-spacing:.5px}
     
-    :root {
-        --suny-red: #990000;
-        --suny-navy: #002244;
-        --sidebar-active-blue: #004488;
-    }
-
-    header { background: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-    .logo-container { display: flex; align-items: center; height: 55px; }
+    .course-list{display:grid;gap:14px}
+    .course-card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;transition:all 0.2s ease}
+    .course-card:hover{border-color:#cbd5e1;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
     
-    .nav-right-area { display: flex; align-items: center; gap: 20px; }
-    .search-tab { display: flex; align-items: center; background: #f0f2f5; padding: 6px 12px; border-radius: 20px; border: 1px solid #e0e0e0; }
-    .search-tab input { background: transparent; border: none; outline: none; font-size: 0.85rem; width: 130px; }
-    .search-tab button { background: none; border: none; font-size: 0.9rem; color: #666; margin-left: 5px; cursor: pointer; }
-
-    .more-toggle-btn { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; z-index: 2001; }
-    .more-toggle-btn span { width: 24px; height: 3px; background-color: var(--suny-navy); border-radius: 2px; }
-
-    .sub-banner { 
-        background: linear-gradient(rgba(0, 34, 68, 0.4), rgba(0, 34, 68, 0.5)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover; 
-        width: 100%;
-        height: 350px;
-    }
-
-    .sub-page-container { max-width: 1240px; margin: 60px auto; padding: 0 20px; display: flex; gap: 50px; align-items: flex-start; }
-
-    .left-sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 110px; }
-    .left-sidebar h2 { font-size: 1.8rem; color: var(--suny-navy); padding-bottom: 15px; border-bottom: 2px solid var(--suny-navy); margin-bottom: 15px; font-weight: bold; }
+    .course-trigger-header{display:flex;justify-content:space-between;align-items:center;padding:20px;cursor:pointer;background:#f8fafc;user-select:none}
+    .course-trigger-header h3{font-size:1.1rem;color:var(--suny-navy);font-weight:600}
+    .course-toggle-icon{font-size:0.85rem;color:var(--suny-red);font-weight:bold;transition:transform 0.3s ease}
     
-    .sidebar-accordion { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .course-expandable-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease-out;background:#fff;border-top:0 solid #e2e8f0}
+    .course-card.active-panel .course-expandable-content{max-height:800px;border-top:1px solid #e2e8f0}
+    .course-card.active-panel .course-toggle-icon{transform:rotate(180deg)}
     
-    .accordion-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background-color: #fff; color: var(--suny-navy); font-weight: bold; font-size: 1rem; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-    .accordion-header:hover { background-color: #f8f9fa; color: var(--suny-red); }
-    .accordion-header span { font-size: 0.8rem; transition: transform 0.3s; }
+    .course-inner-body{padding:25px}
+    .course-meta{font-size:.85rem;color:#64748b;margin-bottom:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
     
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; list-style: none; padding-left: 10px; }
-    .accordion-content li a { display: block; padding: 10px 15px; color: #555; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid #edf2f7; transition: all 0.2s; }
-    .accordion-content li a:hover { color: var(--suny-red); padding-left: 20px; }
-
-    .accordion-content li a.active { color: var(--sidebar-active-blue); font-weight: bold; }
-    .accordion-content li a.active::before { content: "• "; color: var(--sidebar-active-blue); }
-
-    .accordion-item.open .accordion-header { background-color: #edf2f7; color: var(--suny-navy); }
-    .accordion-item.open .accordion-header span { transform: rotate(180deg); }
-    .accordion-item.open .accordion-content { max-height: 250px; }
-
-    .sub-page-wrapper { flex-grow: 1; min-height: 600px; width: 0; }
-    .breadcrumb-top { display: flex; justify-content: flex-end; font-size: 0.85rem; color: #666; margin-bottom: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-
-    .sub-page-header { margin-bottom: 40px; border-bottom: 3px solid var(--suny-red); padding-bottom: 15px; }
-    .sub-page-header h2 { font-size: 2.2rem; color: var(--suny-navy); font-weight: bold; }
+    .course-img{width:100%;max-height:280px;object-fit:cover;border-radius:6px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
     
-    .content-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .course-card p{font-size:.95rem;color:#334155;margin-bottom:12px;line-height:1.7}
+    .course-additional-info{background:#f1f5f9;padding:15px;border-left:4px solid var(--suny-red);border-radius:0 4px 4px 0;font-size:0.9rem;color:#475569;margin-top:15px}
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* Catalog Page Custom Styles */
-    .catalog-download-container { display: flex; justify-content: space-between; align-items: center; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; margin-top: 20px; }
-    .catalog-info h3 { font-size: 1.25rem; color: var(--suny-navy); margin-bottom: 5px; font-weight: bold; }
-    .catalog-info p { font-size: 0.95rem; color: #64748b; }
-    .download-btn { background-color: var(--suny-red); color: white !important; font-weight: bold; padding: 12px 24px; border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-    .download-btn:hover { background-color: #b91c1c; }
-
-    /* Milestones Page Custom Styles */
-    .section-title { font-size: 1.5rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; }
-    .overview-table { width: 100%; border-collapse: collapse; margin-bottom: 35px; background: #fff; border: 1px solid #cbd5e1; }
-    .overview-table th { background: var(--suny-navy); color: #fff; padding: 12px; font-weight: 700; text-align: center; border: 1px solid var(--suny-navy); width: 50%; }
-    .overview-table td { padding: 20px; vertical-align: top; border: 1px solid #cbd5e1; background: #f8fafc; }
-    .overview-table tr:nth-child(even) td { background: #ffffff; }
-    .overview-year-title { font-size: 1.1rem; color: var(--suny-red); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; }
-    
-    .course-list { list-style: none; }
-    .course-list li { font-size: 0.95rem; color: #334155; padding: 6px 0; border-bottom: 1px dashed #e2e8f0; display: flex; justify-content: space-between; }
-    .course-list li:last-child { border-bottom: none; }
-
-    .notes-box { background: #fffaf0; border: 1px solid #fbd38d; border-left: 6px solid #dd6b20; padding: 20px; border-radius: 8px; margin-top: 20px; }
-    .notes-box h4 { color: #dd6b20; font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
-    .notes-box ul { list-style-type: square; padding-left: 20px; }
-    .notes-box li { font-size: 0.95rem; color: #4a5568; margin-bottom: 6px; }
-
-    /* Courses Page Custom Styles */
-    .course-section h3 { font-size: 1.4rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 8px; }
-    .course-section > p { font-size: 0.95rem; color: #555; margin-bottom: 25px; }
-    .course-accordion { display: flex; flex-direction: column; gap: 15px; }
-    .course-item { border: 1px solid #e2e8f0; border-radius: 6px; background: #f8fafc; overflow: hidden; transition: all 0.2s ease; }
-    .course-header { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: #f8fafc; border: none; outline: none; text-align: left; cursor: pointer; }
-    .course-header:hover { background: #f1f5f9; }
-    .course-header-left { display: flex; align-items: center; gap: 12px; }
-    .course-code { background-color: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; }
-    .course-title { font-size: 1rem; font-weight: 700; color: var(--suny-navy); }
-    .course-arrow { font-size: 0.75rem; color: #64748b; transition: transform 0.3s; }
-    
-    .course-body { display: none; background: #ffffff; }
-    .course-item.active .course-body { display: block; }
-    .course-content-inner { padding: 20px; border-top: 1px solid #e2e8f0; }
-    .course-image-box { width: 100%; max-height: 320px; margin-bottom: 15px; border-radius: 6px; overflow: hidden; }
-    .course-image-box img { width: 100%; height: auto; object-fit: cover; display: block; }
-    .course-description { font-size: 0.95rem; color: #4a5568; }
-
-    /* Nav Drawer Settings */
-    .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 2000; display: none; }
-    .drawer-overlay.show { display: block; }
-    
-    .nav-drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #ffffff; box-shadow: -2px 0 10px rgba(0,0,0,0.1); z-index: 2002; transition: right 0.3s ease; padding: 40px 20px; overflow-y: auto; }
-    .nav-drawer.open { right: 0; }
-    
-    .menu-category { margin-bottom: 20px; }
-    .menu-category h3 { font-size: 1.1rem; color: var(--suny-navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #eee; }
-    .menu-category h3 span { font-size: 0.8rem; transition: transform 0.3s; }
-    
-    .drawer-sub-menu { list-style: none; padding-left: 10px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .drawer-sub-menu li a { display: block; padding: 8px 0; font-size: 0.95rem; color: #555; }
-    .drawer-sub-menu li a:hover { color: var(--suny-red); }
-    
-    .menu-category.active .drawer-sub-menu { max-height: 500px; }
-    .menu-category.active h3 span { transform: rotate(180deg); }
-
-    footer { background: var(--suny-navy); color: white; text-align: center; padding: 20px; margin-top: 60px; font-size: 0.9rem; }
-
-    @media (max-width: 1024px) {
-        .sub-page-container { flex-direction: column; gap: 40px; }
-        .left-sidebar { width: 100%; position: static; }
-    }
-    @media (max-width: 768px) {
-        .overview-table, .overview-table tbody, .overview-table tr, .overview-table td, .overview-table th { display: block; width: 100%; }
-    }
+    .drawer-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:2000;display:none}
+    .drawer-overlay.show{display:block}
+    .nav-drawer{position:fixed;top:0;right:-300px;width:300px;height:100%;background:#fff;box-shadow:-2px 0 10px rgba(0,0,0,.1);z-index:2002;transition:right .3s ease;padding:40px 20px;overflow-y:auto}
+    .nav-drawer.open{right:0}
+    .menu-category{margin-bottom:20px}
+    .menu-category h3{font-size:1.1rem;color:var(--suny-navy);cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:1px solid #eee}
+    .menu-category h3 span{font-size:.8rem;transition:transform .3s}
+    .drawer-sub-menu{list-style:none;padding-left:10px;max-height:0;overflow:hidden;transition:max-height .3s ease-out}
+    .drawer-sub-menu li a{display:block;padding:8px 0;font-size:.95rem;color:#555}
+    .drawer-sub-menu li a:hover{color:var(--suny-red)}
+    .menu-category.active .drawer-sub-menu{max-height:500px}
+    .menu-category.active h3 span{transform:rotate(180deg)}
+    footer{background:var(--suny-navy);color:#fff;text-align:center;padding:20px;margin-top:60px;font-size:.9rem}
+    @media (max-width:1024px){.sub-page-container{flex-direction:column;gap:40px}.left-sidebar{width:100%;position:static}.content-container{padding:24px}}
 </style>
 </head>
 <body>
-
-    <header>
-        <div class="logo-container">
-            <a onclick="switchTab('ugrd-program')">
-                <div style="height: 50px; width: 250px; background: #e0e0e0; border: 2px dashed #999; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: #555; font-weight: bold; border-radius: 4px;">LOGO IMAGE PLACEHOLDER</div>
-            </a>
-        </div>
-        <div class="nav-right-area">
-            <div class="search-tab">
-                <input type="text" id="searchInput" placeholder="Search...">
-                <button onclick="handleSearch()">🔍</button>
-            </div>
-            <div class="more-toggle-btn" onclick="toggleDrawer()">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </header>
-
+<header>
+  <div class="logo-container"><a href="index.html"><div style="height:50px;width:250px;background:#e0e0e0;border:2px dashed #999;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#555;font-weight:bold;border-radius:4px">LOGO IMAGE PLACEHOLDER</div></a></div>
+  <div class="nav-right-area"><div class="search-tab"><input type="text" placeholder="Search..."><button>🔍</button></div><div class="more-toggle-btn" onclick="toggleDrawer()"><span></span><span></span><span></span></div></div>
+</header>
+<div id="menu-container"></div>
+<section class="sub-banner"></section>
+<div class="sub-page-container">
+  <nav class="left-sidebar">
+    <h2>Academics</h2>
+    <ul class="sidebar-accordion">
+      <li class="accordion-item open" id="ugrd-item">
+        <div class="accordion-header" onclick="toggleSidebarMenu('ugrd-item')">Undergraduate (UGRD) <span>▼</span></div>
+        <ul class="accordion-content">
+          <li><a href="academics-ugrd-program.html">Program</a></li>
+          <li><a href="academics-ugrd-catalog.html">Catalog</a></li>
+          <li><a href="academics-ugrd-milestones.html">Milestones</a></li>
+          <li><a href="academics-ugrd-courses.html" class="active">Courses</a></li>
+        </ul>
+      </li>
+      <li class="accordion-item" id="grd-item">
+        <div class="accordion-header" onclick="toggleSidebarMenu('grd-item')">Graduate (GRD) <span>▼</span></div>
+        <ul class="accordion-content">
+          <li><a href="academics-grd-program.html">Program</a></li>
+          <li><a href="academics-grd-catalog.html">Catalog</a></li>
+          <li><a href="academics-grd-milestones.html">Milestones</a></li>
+          <li><a href="academics-grd-courses.html">Courses</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <div class="sub-page-wrapper">
+    <div class="breadcrumb-top">ACADEMICS &gt; UGRD &gt; COURSES</div>
+    <div class="sub-page-header"><h2>Undergraduate Courses</h2></div>
+    <div class="nav-drawer" id="navDrawer"></div>
     <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
-    <div class="nav-drawer" id="navDrawer">
-        <div class="menu-category">
-            <h3 onclick="toggleDrawerAccordion(this)">Academics <span>▼</span></h3>
-            <ul class="drawer-sub-menu">
-                <li><a onclick="switchTab('ugrd-program'); toggleDrawer();">Undergraduate Program</a></li>
-                <li><a onclick="switchTab('ugrd-catalog'); toggleDrawer();">Undergraduate Catalog</a></li>
-                <li><a onclick="switchTab('ugrd-milestones'); toggleDrawer();">Undergraduate Milestones</a></li>
-                <li><a onclick="switchTab('ugrd-courses'); toggleDrawer();">Undergraduate Courses</a></li>
-            </ul>
-        </div>
+    <div class="content-container">
+      <div class="section-title">Course Descriptions</div>
+      <div id="courseList" class="course-list"></div>
     </div>
+  </div>
+</div>
+<footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
+<script src="menu.js"></script>
+<script>
+const courses=[
+  {
+    code:'EST 194',
+    title:'Decision-making',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'Reviews common justifications for decisions through quantitative, algorithmic processes and reducing multiple criteria to one variable. Covers basic concepts in cost-benefit analysis, risk assessment, decision trees, expected monetary value, and the analytical hierarchy process. Discussions include uncertainties associated with translating qualitative criteria into quantified variables and assigning values to probabilistic events.'
+  },
+  {
+    code:'EST 202',
+    title:'Introduction to Science, Technology, and Society Studies',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'The dynamics of the relations among modern science, the development and use of technology through engineering, and social concerns. Introduces basic concepts for science-technology studies. Ethical and policy issues that affect the management of science and engineering as expressed in technology are covered.'
+  },
+  {
+    code:'EST 304',
+    title:'Communication for Engineers and Scientists',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'In today’s society, it is essential for educated people to be able to present technical information to a range of audiences using various communication methods and styles. In EST 304, students learn how to communicate technical concepts that make sense not only to other scientists and engineers, but also to audiences ranging from students to technical consumers in the world marketplace. Course content emphasizes: writing clearly, concisely, and persuasively; creating effective visuals; presenting research verbally during oral presentations; providing and receiving feedback on assignments; and working collaboratively in groups. Written, verbal and visual communication styles are examined.'
+  },
+  {
+    code:'EST 331',
+    title:'Ethics in Engineering and AI Technologies',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'Individuals and organizations must make ethical decisions during scientific and engineering endeavors. Various concepts have been developed related to moral conduct, character, ideals, and relationships between people, organizations, and societies, and these concepts relate to how we resolve our ethical issues.  Formal frameworks for ethical decision making will be presented and tested through careful examination of case studies drawn from engineering and industry.  Responsible AI development along with AI policy and governance will also be discussed.'
+  },
+  {
+    code:'EST 391',
+    title:'Technology Assessment',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'This class focuses on technologies and the systems in which they evolve to highlight different forms of evaluating technology. An overview of various methods, approaches, and tools for evaluation will be provided, including SWOT, STIP, forecasting, lifecycle assessments, and impact and risk assessments. The class will provide a context and framework for understanding policy applications of various technologies, as well as broader societal implications. Challenges and opportunities of technological change will be examined in the context of societal implications, including environmental change, ethics, economics, science and engineering, and infrastructure. Students evaluate real-world technologies throughout the semester.'
+  },
+  {
+    code:'EST 392',
+    title:'Engineering Economics',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'This course has a systems analysis approach to problems of planning and design in manufacturing and technical sectors of industry, using principles of cash flow equivalencies. It covers aspects of engineering alternatives through financial concepts including time value of money, annual cost, present worth, incremental rate of return and cost-benefit analysis, analysis of various types of cash flows, development of rate of return, benefit-to-cost ratios, depreciation and the effects of investment tax assessment. Capital allocation theory is used to evaluate competing investment programs.'
+  },
+  {
+    code:'EST 393',
+    title:'Project Management',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'This course addresses fundamental project management concepts and skills needed to successfully initiate, lead, monitor, control and realize projects execution. In this course, students explore project management with a practical approach through case studies and group projects.'
+  },
+  {
+    code:'EST 440',
+    title:'Interdisciplinary Research Methods',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'This course uses scientific research and engineering technology problem-solving as a framework for the synthesis of diverse disciplines studied by students in the first three undergraduate years. Provides students with experience in team problem-solving. Students will work in teams to conduct a technology assessment. Examples of various types of technology assessments will be studied, and students will discuss analysis techniques and team structuring in order to plan and execute a successful project.'
+  },
+  {
+    code:'EST 441',
+    title:'Interdisciplinary Senior Project',
+    meta:'Core · 3 credits',
+    img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details:'Students will select a technology-oriented topic, one that could be related to a selected class theme or be of their choosing. Students will work individually on the topic and present on their research. A paper will also be produced. A book on describing what “technology” is, and how new technologies develop, will be closely read.'
+  }
+  
+];
 
-    <section class="sub-banner"></section>
+document.getElementById('courseList').innerHTML = courses.map((c, index) => `
+  <article class="course-card" id="course-card-${index}">
+    <div class="course-trigger-header" onclick="toggleCourseAccordion(${index})">
+      <h3>${c.code} · ${c.title}</h3>
+      <span class="course-toggle-icon">▼</span>
+    </div>
+    <div class="course-expandable-content">
+      <div class="course-inner-body">
+        <div class="course-meta">${c.meta}</div>
+        <img src="${c.img}" alt="${c.title}" class="course-img">
+        <p><strong>Course Description:</strong> ${c.desc}</p>
+        <div class="course-additional-info">
+          <strong>Note:</strong> ${c.details}
+        </div>
+      </div>
+    </div>
+  </article>
+`).join('');
 
-    <div class="sub-page-container">
-        
-        <nav class="left-sidebar">
-            <h2>Academics</h2>
-            <ul class="sidebar-accordion">
-                <li class="accordion-item open" id="ugrd-item">
-                    <div class="accordion-header" onclick="toggleSidebarMenu('ugrd-item')">
-                        Undergraduate (UGRD) <span>▲</span>
-                    </div>
-                    <ul class="accordion-content">
-                        <li><a onclick="switchTab('ugrd-program')" data-target="ugrd-program" class="active">Program</a></li>
-                        <li><a onclick="switchTab('ugrd-catalog')" data-target="ugrd-catalog">Catalog</a></li>
-                        <li><a onclick="switchTab('ugrd-milestones')" data-target="ugrd-milestones">Milestones</a></li>
-                        <li><a onclick="switchTab('ugrd-courses')" data-target="ugrd-courses">Courses</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+function toggleCourseAccordion(index) {
+    const targetCard = document.getElementById(`course-card-${index}`);
+    targetCard.classList.toggle('active-panel');
+}
 
-        <div class="sub-page-wrapper">
-            <div class="breadcrumb-top" id="breadcrumbText">ACADEMICS > UGRD > PROGRAM</div>
-            <div class="sub-page-header"><h2 id="mainPageTitle">Undergraduate Program</h2></div>
-
-            <div class="content-container">
-                
-                <div id="ugrd-program-content" class="tab-content active" data-title="Undergraduate Program" data-breadcrumb="ACADEMICS > UGRD > PROGRAM">
-                    <p style="font-size: 1.05rem; color: #334155; margin-bottom: 20px;">
-                        The Undergraduate Program in Technological Systems Management provides students with a unique interdisciplinary foundation. The program focuses on understanding, assessing, and managing technology effectively within societal frameworks, preparing students for innovative leadership across diverse technology sectors.
-                    </p>
-                    <p style="font-size: 1.05rem; color: #334155;">
-                        Through rigorous hands-on coursework, foundational engineering design concepts, and advanced research projects, students explore complex modern challenges such as sustainable technology, system planning, and technical communication.
-                    </p>
-                </div>
-
-                <div id="ugrd-catalog-content" class="tab-content" data-title="Undergraduate Catalog" data-breadcrumb="ACADEMICS > UGRD > CATALOG">
-                    <p style="font-size: 1.05rem; color: #334155; margin-bottom: 25px;">
-                        The undergraduate academic catalog outlines standard academic policies, department degree requirements, credit allocation procedures, and the entire repository of undergraduate learning paths available at the university.
-                    </p>
-                    <div class="catalog-download-container">
-                        <div class="catalog-info">
-                            <h3>2025-2026 Undergraduate Official Catalog</h3>
-                            <p>PDF Format • Comprehensive Policy and Curriculum Documentation</p>
-                        </div>
-                        <a href="#" target="_blank" class="download-btn">📥 Download PDF</a>
-                    </div>
-                </div>
-
-                <div id="ugrd-milestones-content" class="tab-content" data-title="Undergraduate Milestones" data-breadcrumb="ACADEMICS > UGRD > MILESTONES">
-                    <div class="section-title">Degree Progress Milestones</div>
-                    
-                    <table class="overview-table">
-                        <thead>
-                            <tr>
-                                <th>First Year & Sophomore</th>
-                                <th>Junior & Senior</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="overview-year-title">Year 1 & 2 Requirements</div>
-                                    <ul class="course-list">
-                                        <li><span>EST 100 Foundation Seminar</span><span>3 Credits</span></li>
-                                        <li><span>WRT 102 Intermediate Writing</span><span>3 Credits</span></li>
-                                        <li><span>AMS 151 Applied Calculus I</span><span>4 Credits</span></li>
-                                    </ul>
-                                </td>
-                                <td>
-                                    <div class="overview-year-title">Year 3 & 4 Requirements</div>
-                                    <ul class="course-list">
-                                        <li><span>EST 391 Technology Assessment</span><span>3 Credits</span></li>
-                                        <li><span>EST 440 Senior Research Design</span><span>3 Credits</span></li>
-                                        <li><span>EST 441 Senior Research Project</span><span>3 Credits</span></li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="notes-box">
-                        <h4>💡 Important Academic Advising Notes</h4>
-                        <ul>
-                            <li>Students must maintain a minimum cumulative GPA of <strong>2.00</strong> to remain in good standing.</li>
-                            <li>All major focus courses must be completed with a letter grade of <strong>C or higher</strong>.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="ugrd-courses-content" class="tab-content" data-title="Undergraduate Courses" data-breadcrumb="ACADEMICS > UGRD > COURSES">
-                    <div class="course-section">
-                        <h3>Department Course List</h3>
-                        <p>Click on each course below to view the detailed description and visual overview.</p>
-                        <div class="course-accordion">
-                            
-                            <div class="course-item">
-                                <button class="course-header" onclick="toggleCourseAccordion(this)">
-                                    <div class="course-header-left">
-                                        <span class="course-code">EST 100</span>
-                                        <span class="course-title">Designing Technology for Social Change</span>
-                                    </div>
-                                    <span class="course-arrow">▼</span>
-                                </button>
-                                <div class="course-body">
-                                    <div class="course-content-inner">
-                                        <div class="course-image-box">
-                                            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&auto=format&fit=crop&q=80" alt="EST 100">
-                                        </div>
-                                        <div class="course-description">This course introduces students to the foundational principles of technological design tailored for social impact.</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div> 
-        </div> 
-    </div> 
-    
-    <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
-
-    <script>
-        // 1. 탭 전환 제어 함수
-        function switchTab(tabId) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
-            
-            const activeContent = document.getElementById(tabId + '-content');
-            if (activeContent) {
-                activeContent.classList.add('active');
-                
-                // 각 탭에 주입되어 있는 고유 데이터 타이틀 변경 처리
-                const originalTitle = activeContent.getAttribute('data-title');
-                const originalBreadcrumb = activeContent.getAttribute('data-breadcrumb');
-                
-                document.getElementById('mainPageTitle').innerText = originalTitle || "";
-                document.getElementById('breadcrumbText').innerText = originalBreadcrumb || "";
-            }
-            
-            const sidebarLinks = document.querySelectorAll('.accordion-content li a');
-            sidebarLinks.forEach(link => link.classList.remove('active'));
-            
-            const targetLink = document.querySelector(`[data-target="${tabId}"]`);
-            if (targetLink) targetLink.classList.add('active');
-        }
-
-        // 2. 사이드바 대분류 아코디언 토글 함수
-        function toggleSidebarMenu(itemId) {
-            const item = document.getElementById(itemId);
-            if (item) {
-                item.classList.toggle('open');
-                const span = item.querySelector('.accordion-header span');
-                if (item.classList.contains('open')) {
-                    span.innerText = '▲';
-                } else {
-                    span.innerText = '▼';
-                }
-            }
-        }
-
-        // 3. Courses 전용 독립형 토글 함수 (충돌 완전 해결)
-        function toggleCourseAccordion(button) {
-            const currentItem = button.closest('.course-item');
-            if (!currentItem) return;
-            
-            currentItem.classList.toggle('active');
-            const arrow = currentItem.querySelector('.course-arrow');
-            
-            if (currentItem.classList.contains('active')) {
-                if(arrow) arrow.innerText = '▲';
-            } else {
-                if(arrow) arrow.innerText = '▼';
-            }
-        }
-
-        // 4. 모바일 우측 서랍장 기능
-        function toggleDrawer() {
-            const drawer = document.getElementById('navDrawer');
-            const overlay = document.getElementById('drawerOverlay');
-            if (drawer && overlay) {
-                drawer.classList.toggle('open');
-                overlay.classList.toggle('show');
-            }
-        }
-
-        function toggleDrawerAccordion(element) {
-            if (element && element.parentElement) {
-                element.parentElement.classList.toggle('active');
-                const subMenu = element.parentElement.querySelector('.drawer-sub-menu');
-                if(element.parentElement.classList.contains('active')) {
-                    subMenu.style.maxHeight = "500px";
-                } else {
-                    subMenu.style.maxHeight = null;
-                }
-            }
-        }
-
-        function handleSearch() {
-            const query = document.getElementById('searchInput')?.value || "";
-            if(query.trim() !== "") {
-                alert(`"${query}"에 대한 검색 결과가 없습니다.`);
-            } else {
-                alert("검색어를 입력해 주세요.");
-            }
-        }
-    </script>
+function toggleSidebarMenu(itemId){document.querySelectorAll('.accordion-item').forEach(item=>item.id===itemId?item.classList.toggle('open'):item.classList.remove('open'));}
+function toggleDrawer(){const d=document.getElementById('navDrawer'),o=document.getElementById('drawerOverlay');if(d&&o){d.classList.toggle('open');o.classList.toggle('show');}}
+</script>
 </body>
 </html>

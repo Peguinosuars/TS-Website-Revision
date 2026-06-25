@@ -60,17 +60,12 @@
     .sub-page-header p { color: var(--suny-red); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; margin-top: 5px; }
     
     .chair-container { background: white; padding: 50px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    .chair-headline-block { display: flex; gap: 40px; align-items: center; margin-bottom: 30px; padding-bottom: 25px; border-bottom: 1px dashed #e2e8f0; }
-    
-    .chair-photo-side { flex-shrink: 0; text-align: center; width: 160px; }
-    .chair-img-box { width: 160px; height: 200px; background: #e2e8f0; border-radius: 6px; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 0.75rem; font-weight: 600; overflow: hidden; margin-bottom: 8px; }
-    .chair-name { font-size: 1.05rem; color: var(--suny-navy); font-weight: bold; margin-bottom: 2px; }
-    .chair-title { font-size: 0.8rem; color: var(--suny-red); font-weight: 600; text-transform: uppercase; }
-
-    .chair-headline-text { flex-grow: 1; }
+    .chair-headline { display: flex; gap: 40px; align-items: center; margin-bottom: 30px; padding-bottom: 25px; border-bottom: 1px dashed #e2e8f0; }
+    .chair-photo { flex-shrink: 0; width: 160px; text-align: center; }
+    .chair-photo div { width: 160px; height: 200px; background: #e2e8f0; border-radius: 6px; border: 1px solid #cbd5e1; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+    .chair-photo h4 { font-size: 1.05rem; color: var(--suny-navy); font-weight: bold; margin-bottom: 2px; }
+    .chair-photo p { font-size: 0.8rem; color: var(--suny-red); font-weight: 600; text-transform: uppercase; }
     .welcome-heading { font-size: 1.55rem; color: var(--suny-navy); font-weight: 700; line-height: 1.5; text-align: left; }
-    
-    .chair-body-block { width: 100%; }
     .message-p { font-size: 1.05rem; color: #4a5568; margin-bottom: 22px; text-align: justify; letter-spacing: -0.2px; }
     .quote-block { background: #f8fafc; border-left: 4px solid var(--suny-red); padding: 20px; font-style: italic; margin: 25px 0; color: #334155; font-size: 1.02rem; line-height: 1.6; }
     
@@ -124,20 +119,18 @@
             </div>
 
             <div class="chair-container">
-                <div class="chair-headline-block">
-                    <div class="chair-photo-side">
-                        <div class="chair-img-box"><span>PHOTO PLACEHOLDER</span></div>
-                        <h4 class="chair-name">Department Chair</h4>
-                        <p class="chair-title">Technology & Society</p>
+                <div class="chair-headline">
+                    <div class="chair-photo">
+                        <div>PHOTO PLACEHOLDER</div>
+                        <h4>Department Chair</h4>
+                        <p>Technology & Society</p>
                     </div>
-                    <div class="chair-headline-text">
-                        <h3 class="welcome-heading">
-                            Welcome to all students and stakeholders interested in our Technology and Society and interested in the challenge of understanding and enabling technology in and for society.
-                        </h3>
-                    </div>
+                    <h3 class="welcome-heading">
+                        Welcome to all students and stakeholders interested in our Technology and Society and interested in the challenge of understanding and enabling technology in and for society.
+                    </h3>
                 </div>
 
-                <div class="chair-body-block">
+                <div>
                     <p class="message-p">
                         Quoting philosopher of science Thomas Kuhn, he asked <strong>“does a field make progress because it is a science, or is it a science because it makes progress?”</strong> Similarly, as Chair of this department, my question to you is <strong>“does our society make progress simply because of technological change, or does technology really only make progress when a society progresses?"</strong> Just as a scientific truth cannot be established solely by objective criteria but is defined by a social consensus of a scientific community, technologies cannot be established or improved solely by objective criteria but are improved by the consensus of a society. Thus, our mission is to train our graduates to reflect upon and to help communicate how to improve and to manage technology for these wider interests of the consensus of a society.
                     </p>
@@ -176,11 +169,17 @@
 
     <script>
         function toggleDrawer() {
-            document.getElementById('navDrawer').classList.toggle('open');
-            document.getElementById('drawerOverlay').classList.toggle('show');
+            const drawer = document.getElementById('navDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('show');
+            }
         }
         function toggleAccordion(element) {
-            element.parentElement.classList.toggle('active');
+            if (element && element.parentElement) {
+                element.parentElement.classList.toggle('active');
+            }
         }
     </script>
 </body>

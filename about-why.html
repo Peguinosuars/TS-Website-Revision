@@ -43,9 +43,6 @@
     .sub-depth-links { padding-left: 15px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
     .sub-depth-links a { font-weight: 500; color: #666; font-size: 0.88rem; }
 
-    /* ==========================================
-       ★ `about-mission`과 동일한 350px 이미지 단독 배너
-       ========================================== */
     .sub-banner { 
         background: linear-gradient(rgba(0, 34, 68, 0.4), rgba(0, 34, 68, 0.5)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover; 
         width: 100%;
@@ -179,25 +176,7 @@
             </div>
 
             <div class="why-container">
-                <div class="content-box">
-                    <h3>Key Strengths & Core Values</h3>
-                    <p>
-                        The Department of Technology and Society provides students with a unique interdisciplinary approach that perfectly combines analytical frameworks with hands-on technical expertise.
-                    </p>
-                    <ul class="bullet-list">
-                        <li><strong>Global SBU Degree:</strong> Earn an authentic, world-recognized Stony Brook University degree while studying in an ultra-diverse international environment with peers from over 30 countries.</li>
-                        <li><strong>Dual-Track Analytical Focus:</strong> Learn not just the internal engineering mechanisms, but the profound economic, social, legal, and environmental impacts of advanced emerging technologies.</li>
-                        <li><strong>Songdo Smart City Synergy:</strong> Benefit from a dedicated local-global community dynamically linked with target industries, green research centers, and global corporate scholarship frameworks.</li>
-                        <li><strong>Strategic Career Paths:</strong> Nurturing critical working and thinking abilities aligned with "4.0" economy needs, positioning our graduates uniquely for elite tracks toward <strong>CTO (Chief Technology Officer), CIO, and CDO</strong> positions.</li>
-                    </ul>
-                </div>
-
-                <div class="content-box">
-                    <h3>Our Educational Vision</h3>
-                    <p>
-                        Ultimately, we train our students to make creative, highly responsible, and innovative decisions. By developing strategic skills alongside a profound awareness of digital ethics and social good, TS graduates do not just follow the future—they actively design it.
-                    </p>
-                </div>
+                <div id="whyContent"></div>
             </div>
         </div>
 
@@ -206,6 +185,32 @@
     <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
 
     <script>
+        const whySections = [
+            {
+                title: 'Key Strengths & Core Values',
+                intro: 'The Department of Technology and Society provides students with a unique interdisciplinary approach that perfectly combines analytical frameworks with hands-on technical expertise.',
+                bullets: [
+                    ['Global SBU Degree:', 'Earn an authentic, world-recognized Stony Brook University degree while studying in an ultra-diverse international environment with peers from over 30 countries.'],
+                    ['Dual-Track Analytical Focus:', 'Learn not just the internal engineering mechanisms, but the profound economic, social, legal, and environmental impacts of advanced emerging technologies.'],
+                    ['Songdo Smart City Synergy:', 'Benefit from a dedicated local-global community dynamically linked with target industries, green research centers, and global corporate scholarship frameworks.'],
+                    ['Strategic Career Paths:', 'Nurturing critical working and thinking abilities aligned with "4.0" economy needs, positioning our graduates uniquely for elite tracks toward <strong>CTO (Chief Technology Officer), CIO, and CDO</strong> positions.']
+                ]
+            },
+            {
+                title: 'Our Educational Vision',
+                intro: 'Ultimately, we train our students to make creative, highly responsible, and innovative decisions. By developing strategic skills alongside a profound awareness of digital ethics and social good, TS graduates do not just follow the future—they actively design it.'
+            }
+        ];
+
+        const whyContent = document.getElementById('whyContent');
+        whyContent.innerHTML = whySections.map(section => `
+            <div class="content-box">
+                <h3>${section.title}</h3>
+                <p>${section.intro}</p>
+                ${section.bullets ? `<ul class="bullet-list">${section.bullets.map(([strong, text]) => `<li><strong>${strong}</strong> ${text}</li>`).join('')}</ul>` : ''}
+            </div>
+        `).join('');
+
         function toggleDrawer() {
             document.getElementById('navDrawer').classList.toggle('open');
             document.getElementById('drawerOverlay').classList.toggle('show');

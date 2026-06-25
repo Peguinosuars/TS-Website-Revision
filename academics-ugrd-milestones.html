@@ -67,18 +67,57 @@
     .drawer-overlay.show { display: block; }
     .nav-drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #ffffff; box-shadow: -2px 0 10px rgba(0,0,0,0.1); z-index: 2002; transition: right 0.3s ease; padding: 40px 20px; overflow-y: auto; }
     .nav-drawer.open { right: 0; }
-    .menu-category { margin-bottom: 20px; }
-    .menu-category h3 { font-size: 1.1rem; color: var(--suny-navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px solid #eee; }
-    .menu-category h3 span { font-size: 0.8rem; transition: transform 0.3s; }
-    .drawer-sub-menu { list-style: none; padding-left: 10px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .drawer-sub-menu li a { display: block; padding: 8px 0; font-size: 0.95rem; color: #555; }
-    .drawer-sub-menu li a:hover { color: var(--suny-red); }
-    .menu-category.active .drawer-sub-menu { max-height: 500px; }
-    .menu-category.active h3 span { transform: rotate(180deg); }
+    .menu-category { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e5e7eb; }
+    .menu-category h3 { font-size: 1rem; color: var(--suny-navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 8px 0; }
+    .menu-category h3:hover { color: var(--suny-red); }
+    .menu-category h3 .arrow { font-size: 0.8rem; transition: transform 0.3s ease; color: #999; }
+    .menu-category.active h3 .arrow { transform: rotate(180deg); color: var(--suny-red); }
+    .drawer-sub-menu { list-style: none; padding-left: 12px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .menu-category.active .drawer-sub-menu { max-height: 600px; margin-top: 6px; }
+    .drawer-sub-menu li { margin: 6px 0; }
+    .drawer-sub-menu a { display: block; padding: 4px 0; font-size: 0.92rem; color: #555; font-weight: 500; }
+    .drawer-sub-menu a:hover { color: var(--suny-red); padding-left: 4px; }
+
+    .section-title { font-size: 1.6rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 25px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .overview-table { width: 100%; border-collapse: collapse; margin-bottom: 35px; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #cbd5e1; }
+    .overview-table th { background: var(--suny-navy); color: #fff; padding: 15px; font-weight: 700; font-size: 1.1rem; text-align: center; width: 50%; border: 1px solid var(--suny-navy); }
+    .overview-table td { padding: 22px; vertical-align: top; border: 1px solid #cbd5e1; background: #f8fafc; }
+    .overview-table tr:nth-child(even) td { background: #ffffff; }
+    .overview-year-title { font-size: 1.15rem; color: var(--suny-red); font-weight: 800; margin-bottom: 12px; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; }
+    
+    .course-list { list-style: none; padding-left: 5px; }
+    .course-list li { font-size: 0.95rem; color: #334155; padding: 8px 0; border-bottom: 1px dashed #e2e8f0; display: flex; justify-content: space-between; }
+    .course-list li:last-child { border-bottom: none; }
+
+    .spec-accordion { margin-bottom: 35px; display: flex; flex-direction: column; gap: 12px; }
+    .spec-item { border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    
+    .spec-trigger { width: 100%; padding: 18px 25px; background: #ffffff; color: var(--suny-navy); border: none; outline: none; text-align: left; font-size: 1.2rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.2s ease; }
+    .spec-trigger:hover { background: #f8fafc; color: var(--suny-red); }
+    .spec-trigger .icon { font-size: 0.9rem; transition: transform 0.3s ease; color: #64748b; }
+    
+    .spec-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; background: #fff; }
+    .spec-content-inner { padding: 25px; border-top: 1px solid #e2e8f0; }
+
+    .spec-item.active { border-color: var(--sidebar-active-blue); box-shadow: 0 4px 12px rgba(0,68,136,0.08); }
+    .spec-item.active .spec-trigger { background: #f0f7ff; color: var(--sidebar-active-blue); }
+    .spec-item.active .spec-trigger .icon { transform: rotate(180deg); color: var(--sidebar-active-blue); }
+    .spec-item.active .spec-content { max-height: 2000px; }
+
+    .notes-box { background: #fffaf0; border: 1px solid #fbd38d; border-left: 6px solid #dd6b20; padding: 25px; border-radius: 8px; margin-bottom: 10px; }
+    .notes-box h4 { color: #dd6b20; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .notes-box ul { list-style-type: square; padding-left: 20px; }
+    .notes-box li { font-size: 0.98rem; color: #4a5568; margin-bottom: 8px; line-height: 1.6; }
+    .notes-box li strong { color: #1a202c; }
 
     @media (max-width: 1024px) {
         .sub-page-container { flex-direction: column; gap: 40px; }
         .left-sidebar { width: 100%; position: static; }
+    }
+
+    @media (max-width: 768px) {
+        .overview-table, .overview-table tbody, .overview-table tr, .overview-table td, .overview-table th { display: block; width: 100%; }
     }
 </style>
 </head>
@@ -141,9 +180,15 @@
     
                 <p style="color: #666; margin-bottom: 35px;">The following shows the general degree milestones for Technological Systems Management majors.</p>
 
-                <div class="section-title">✨ General Roadmap</div>
+                <div class="section-title">✨ General Overview Roadmap</div>
                 
                 <table class="overview-table">
+                    <thead>
+                        <tr>
+                            <th>Fall Semester (1st, 3rd, 5th, 7th)</th>
+                            <th>Spring Semester (2nd, 4th, 6th, 8th)</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr>
                             <td>
@@ -252,6 +297,12 @@
                         <div class="spec-content">
                             <div class="spec-content-inner">
                                 <table class="overview-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fall Semester</th>
+                                            <th>Spring Semester</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr>
                                             <td>
@@ -371,6 +422,12 @@
                         <div class="spec-content">
                             <div class="spec-content-inner">
                                 <table class="overview-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fall Semester</th>
+                                            <th>Spring Semester</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr>
                                             <td>
@@ -489,6 +546,12 @@
                         <div class="spec-content">
                             <div class="spec-content-inner">
                                 <table class="overview-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Fall Semester</th>
+                                            <th>Spring Semester</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
                                         <tr>
                                             <td>
@@ -616,13 +679,12 @@
 
     </div>
 
-     <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
+    <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
 
     <script src="menu.js"></script>
     <script>
         function toggleSidebarMenu(itemId) {
             const allItems = document.querySelectorAll('.accordion-item');
-            
             allItems.forEach(item => {
                 if (item.id === itemId) {
                     item.classList.toggle('open');
@@ -632,18 +694,10 @@
             });
         }
 
-        function toggleDrawer() {
-            const drawer = document.getElementById('navDrawer');
-            const overlay = document.getElementById('drawerOverlay');
-            if (drawer && overlay) {
-                drawer.classList.toggle('open');
-                overlay.classList.toggle('show');
-            }
-        }
-        function toggleAccordion(element) {
-            if (element && element.parentElement) {
-                element.parentElement.classList.toggle('active');
-            }
+        function toggleSpec(button) {
+            const currentItem = button.closest('.spec-item');
+            if (!currentItem) return;
+            currentItem.classList.toggle('active');
         }
     </script>
 </body>

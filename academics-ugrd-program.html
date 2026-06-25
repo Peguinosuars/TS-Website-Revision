@@ -35,34 +35,26 @@
 
     .sub-page-container { max-width: 1240px; margin: 60px auto; padding: 0 20px; display: flex; gap: 50px; align-items: flex-start; }
 
-    /* -------------------------------------------
-        ★ 좌측 아코디언 사이드바 스타일
-    -------------------------------------------- */
     .left-sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 110px; }
     .left-sidebar h2 { font-size: 1.8rem; color: var(--suny-navy); padding-bottom: 15px; border-bottom: 2px solid var(--suny-navy); margin-bottom: 15px; font-weight: bold; }
     
     .sidebar-accordion { list-style: none; display: flex; flex-direction: column; gap: 5px; }
     
-    /* 대분류 버튼 (UGRD, GRD) */
     .accordion-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background-color: #fff; color: var(--suny-navy); font-weight: bold; font-size: 1rem; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
     .accordion-header:hover { background-color: #f8f9fa; color: var(--suny-red); }
     .accordion-header span { font-size: 0.8rem; transition: transform 0.3s; }
     
-    /* 세부항목 박스 (기본 숨김) */
     .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; list-style: none; padding-left: 10px; }
     .accordion-content li a { display: block; padding: 10px 15px; color: #555; font-size: 0.9rem; font-weight: 500; border-bottom: 1px solid #edf2f7; transition: all 0.2s; }
     .accordion-content li a:hover { color: var(--suny-red); padding-left: 20px; }
     
-    /* ★ 현재 내가 보고 있는 세부 메뉴 강조 스타일 */
     .accordion-content li a.active { color: var(--sidebar-active-blue); font-weight: bold; }
     .accordion-content li a.active::before { content: "• "; color: var(--sidebar-active-blue); }
 
-    /* 대분류 활성화(열림) 상태 클래스 */
     .accordion-item.open .accordion-header { background-color: #edf2f7; color: var(--suny-navy); }
-    .accordion-item.open .accordion-header span { transform: rotate(180deg); } /* 화살표 뒤집기 */
-    .accordion-item.open .accordion-content { max-height: 200px; /* 서브메뉴 펼쳐짐 */ }
+    .accordion-item.open .accordion-header span { transform: rotate(180deg); } 
+    .accordion-item.open .accordion-content { max-height: 200px;}
 
-    /* 우측 콘텐츠 영역 */
     .sub-page-wrapper { flex-grow: 1; min-height: 600px; width: 0; }
     .breadcrumb-top { display: flex; justify-content: flex-end; font-size: 0.85rem; color: #666; margin-bottom: 10px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
 
@@ -70,8 +62,24 @@
     .sub-page-header h2 { font-size: 2.2rem; color: var(--suny-navy); }
     .sub-page-header p { color: var(--suny-red); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; margin-top: 5px; }
     
-    /* 본문 컨텐츠 박스 */
     .content-container { background: white; padding: 50px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .ugrd-section { margin-bottom: 40px; }
+    .ugrd-section h3 { font-size: 1.4rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .ugrd-section p { font-size: 1rem; color: #555; line-height: 1.6; margin-bottom: 15px; }
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
+    .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; text-align: center; }
+    .stat-card .num { display: block; font-size: 1.8rem; font-weight: 800; color: var(--suny-red); margin-bottom: 5px; }
+    .stat-card .label { font-size: 0.9rem; color: #475569; font-weight: 600; }
+    .spec-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .spec-table th { background-color: #f1f5f9; color: var(--suny-navy); padding: 12px; text-align: left; font-size: 0.9rem; border-bottom: 2px solid #cbd5e1; }
+    .spec-table td { padding: 14px 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; vertical-align: top; }
+    .badge { display: inline-block; background-color: #e2e8f0; color: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin: 2px; }
+    .badge-red { background-color: #fee2e2; color: #991b1b; }
+    .alert-box { background-color: #fff5f5; border: 1px solid #fca5a5; border-left: 4px solid var(--suny-red); padding: 20px; border-radius: 6px; margin-top: 15px; }
+    .alert-box h4 { color: var(--suny-red); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .alert-box ul { list-style: none; }
+    .alert-box li { position: relative; padding-left: 15px; margin-bottom: 8px; font-size: 0.95rem; color: #444; }
+    .alert-box li::before { content: "•"; position: absolute; left: 0; color: var(--suny-red); font-weight: bold; }
 
     /* menu.js 드로어 메뉴창 정상 구동 필수 CSS */
     .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 2000; display: none; }
@@ -152,36 +160,7 @@
             </div>
 
             <div class="content-container">
-    
-    <style>
-        .ugrd-section { margin-bottom: 40px; }
-        .ugrd-section h3 { font-size: 1.4rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .ugrd-section p { font-size: 1rem; color: #555; line-height: 1.6; margin-bottom: 15px; }
-        
-        /* 그리드 카드 레이아웃 */
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 20px 0; }
-        .stat-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; text-align: center; }
-        .stat-card .num { display: block; font-size: 1.8rem; font-weight: 800; color: var(--suny-red); margin-bottom: 5px; }
-        .stat-card .label { font-size: 0.9rem; color: #475569; font-weight: 600; }
-
-        /* 테이블 깔끔하게 정리 */
-        .spec-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        .spec-table th { background-color: #f1f5f9; color: var(--suny-navy); padding: 12px; text-align: left; font-size: 0.9rem; border-bottom: 2px solid #cbd5e1; }
-        .spec-table td { padding: 14px 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; vertical-align: top; }
-        
-        /* 미니 배지 */
-        .badge { display: inline-block; background-color: #e2e8f0; color: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin: 2px; }
-        .badge-red { background-color: #fee2e2; color: #991b1b; }
-
-        /* 경고/공지 박스 단일화 */
-        .alert-box { background-color: #fff5f5; border: 1px solid #fca5a5; border-left: 4px solid var(--suny-red); padding: 20px; border-radius: 6px; margin-top: 15px; }
-        .alert-box h4 { color: var(--suny-red); font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
-        .alert-box ul { list-style: none; }
-        .alert-box li { position: relative; padding-left: 15px; margin-bottom: 8px; font-size: 0.95rem; color: #444; }
-        .alert-box li::before { content: "•"; position: absolute; left: 0; color: var(--suny-red); font-weight: bold; }
-    </style>
-
-    <div class="ugrd-section">
+                <div class="ugrd-section">
         <h3>Program Overview</h3>
         <p>Technological Systems Management (TSM) prepares graduates to lead digital initiatives and manage major projects in fast-paced global environments of technological change and disruption.</p>
         
@@ -241,42 +220,34 @@
         <div class="alert-box">
             <h4>Requirements for Acceptance into the Major</h4>
             <ul>
-                <li><strong>Prerequisites:</strong>  <strong>C or higher</strong> in Calculus I, Calculus II, and 1 SNW course.</li>
+                <li><strong>Prerequisites:</strong>  <strong>C or higher</strong> in Calculus I, Calculus II, and the SNW course.</li>
                 <li><strong>Minimum GPA:</strong> Cumulative GPA of <strong>2.80 or higher</strong> is strictly required.</li>
                 <li><strong>Time Limit:</strong> All requirements must be met within <strong>1 year</strong> of enrolling in the first major-entry course.</li>
                 <li><strong>Note:</strong> Fulfilling requirements does not guarantee entry; admission is competitive and subject.</li>
             </ul>
         </div>
     </div>
-</div>
-    </div>
-
-</div></p>
+                </div>
             </div>
         </div>
-
     </div>
 
     <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
 
     <script src="menu.js"></script>
     <script>
-        // 1. 좌측 사이드바 하나 열면 다른 거 닫히는 기능 함수
         function toggleSidebarMenu(itemId) {
             const allItems = document.querySelectorAll('.accordion-item');
             
             allItems.forEach(item => {
                 if (item.id === itemId) {
-                    // 클릭한 것은 열고 닫기 토글
                     item.classList.toggle('open');
                 } else {
-                    // 클릭하지 않은 다른 것들은 무조건 닫기
                     item.classList.remove('open');
                 }
             });
         }
 
-        // 2. 상단 우측 더보기(햄버거) 기능 함수
         function toggleDrawer() {
             const drawer = document.getElementById('navDrawer');
             const overlay = document.getElementById('drawerOverlay');

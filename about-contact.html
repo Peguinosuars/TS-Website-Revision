@@ -64,29 +64,18 @@
     .sub-page-header h2 { font-size: 2.5rem; color: var(--suny-navy); text-transform: uppercase; }
     .sub-page-header p { color: var(--suny-red); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; margin-top: 5px; }
 
-    .contact-box-container { background: white; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2e8f0; }
-    
-    .map-container { width: 100%; height: 400px; background-color: #e5e3df; }
-    .map-container iframe { width: 100%; height: 100%; border: none; display: block; }
-
-    .address-red-bar { background-color: #a31d1d; color: white; padding: 30px 35px; }
-    .address-red-bar h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.3px; }
-    .address-content-row { display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; font-weight: 500; color: #f9f9f9; }
-    .address-content-row i { font-size: 1.1rem; margin-top: 4px; }
-    .address-label { font-weight: bold; margin-right: 25px; display: inline-block; }
-
-    .contact-info-footer { padding: 30px 35px; background-color: #ffffff; display: flex; justify-content: space-between; align-items: center; }
-    .info-left-block { display: flex; align-items: flex-start; gap: 15px; }
-    .info-left-block i { font-size: 1.25rem; color: #a31d1d; margin-top: 4px; }
-    .info-text-list { list-style: none; }
-    .info-text-list li:first-child { font-weight: bold; color: #222; font-size: 1rem; margin-bottom: 8px; }
-    .info-text-list li:not(:first-child) { font-size: 0.93rem; color: #555; margin-bottom: 4px; }
-    .info-text-list li strong { color: #333; display: inline-block; width: 60px; }
-    .info-text-list li a:hover { color: #a31d1d; text-decoration: underline; }
-
-    .social-links-right { display: flex; gap: 8px; }
-    .social-btn { width: 34px; height: 34px; background-color: #222; color: white; display: flex; justify-content: center; align-items: center; border-radius: 3px; font-size: 0.95rem; transition: background-color 0.2s ease; }
-    .social-btn:hover { background-color: var(--suny-red); }
+    .contact-box { background: white; border-radius: 4px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2e8f0; }
+    .map { width: 100%; height: 400px; background: #e5e3df; }
+    .map iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .contact-bar { background: #a31d1d; color: white; padding: 30px 35px; }
+    .contact-bar h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; }
+    .contact-bar p { display: flex; gap: 12px; font-size: 1rem; font-weight: 500; color: #f9f9f9; }
+    .contact-info { padding: 30px 35px; background: #fff; }
+    .contact-info ul { list-style: none; }
+    .contact-info li { font-size: 0.93rem; color: #555; margin-bottom: 4px; }
+    .contact-info li:first-child { font-weight: bold; color: #222; font-size: 1rem; margin-bottom: 8px; }
+    .contact-info strong { color: #333; display: inline-block; width: 60px; }
+    .contact-info a:hover { color: #a31d1d; text-decoration: underline; }
 
     footer { background: #1a1a1a; color: #ccc; text-align: center; padding: 30px 20px; margin-top: 100px; font-size: 0.9rem; }
 
@@ -140,31 +129,21 @@
                 <p>About / Contact</p>
             </div>
 
-            <div class="contact-box-container">
-                
-                <div class="map-container">
+            <div class="contact-box">
+                <div class="map">
                     <iframe src="https://maps.google.com/maps?q=SUNY%20Korea&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-
-                <div class="address-red-bar">
+                <div class="contact-bar">
                     <h3>The Technology and Society</h3>
-                    <div class="address-content-row">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span><span class="address-label">Address</span>119-2 Songdo Moonhwa-ro Yeonsu-gu, Incheon, Korea 21985</span>
-                    </div>
+                    <p><i class="fa-solid fa-location-dot"></i><span><strong>Address</strong>119-2 Songdo Moonhwa-ro Yeonsu-gu, Incheon, Korea 21985</span></p>
                 </div>
-
-                <div class="contact-info-footer">
-                    <div class="info-left-block">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <ul class="info-text-list">
-                            <li>Department Contact Information</li>
-                            <li>• <strong>Phone :</strong> +82.32.626.1355</li>
-                            <li>• <strong>Email :</strong> <a href="mailto:ts@sunykorea.ac.kr">ts@sunykorea.ac.kr</a></li>
-                        </ul>
-                    </div>
+                <div class="contact-info">
+                    <ul>
+                        <li>Department Contact Information</li>
+                        <li>• <strong>Phone :</strong> +82.32.626.1355</li>
+                        <li>• <strong>Email :</strong> <a href="mailto:ts@sunykorea.ac.kr">ts@sunykorea.ac.kr</a></li>
+                    </ul>
                 </div>
-
             </div>
         </div>
     </div>
@@ -175,11 +154,17 @@
 
     <script>
         function toggleDrawer() {
-            document.getElementById('navDrawer').classList.toggle('open');
-            document.getElementById('drawerOverlay').classList.toggle('show');
+            const drawer = document.getElementById('navDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('show');
+            }
         }
         function toggleAccordion(element) {
-            element.parentElement.classList.toggle('active');
+            if (element && element.parentElement) {
+                element.parentElement.classList.toggle('active');
+            }
         }
     </script>
 </body>
