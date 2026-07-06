@@ -16,6 +16,7 @@
         --tag-ict: #16a34a;
         --tag-bsms: #7c3aed;
         --tag-AI: #4b5563;
+        --tag-SUNY-Korea-Only: #f11111;
     }
     header{background:#fff;padding:15px 50px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
     .logo-container{display:flex;align-items:center;height:55px}
@@ -63,7 +64,8 @@
     .sticker-ict { background: var(--tag-ict); }
     .sticker-bsms { background: var(--tag-bsms); }
     .sticker-AI { background: var(--tag-AI); }
-    
+    .sticker-SUNY-Korea-Only { background: var(--tag-SUNY-Korea-Only); }
+    .sticker-elective { background: #6b7280; }
     .course-expandable-content{max-height:0;overflow:hidden;transition:max-height 0.4s ease-out;background:#fff;border-top:0 solid #e2e8f0}
     .course-card.active-panel .course-expandable-content{max-height:1200px;border-top:1px solid #e2e8f0}
     .course-card.active-panel .course-toggle-icon { transform: rotate(180deg); color: var(--suny-red); }
@@ -128,10 +130,8 @@
   <div class="sub-page-wrapper">
     <div class="breadcrumb-top">ACADEMICS &gt; UGRD &gt; COURSES</div>
     <div class="sub-page-header"><h2>Undergraduate Courses</h2></div>
-    <div class="nav-drawer" id="navDrawer"></div>
-    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
     <div class="content-container">
-      <div class="section-title">Course Descriptions</div>
+      <div class="section-title">TS Department</div>
       <div id="courseList" class="course-list"></div>
     </div>
   </div>
@@ -139,7 +139,7 @@
 <footer><p>&copy; 2026 Department of Technology and Society, SUNY Korea. All rights reserved.</p></footer>
 <script src="menu.js"></script>
 <script>
-const courses=[
+const courses = [
   {
     code:'EST 100',
     title:'Designing, Producing & Presenting Multimedia Projects',
@@ -283,8 +283,10 @@ const courses=[
     meta:'3 credits',
     track: 'ICT Specialization',
     track2: 'AI Theme',
+    track3: 'SUNY Korea Only',
     trackClass: 'sticker-ict',
     trackClass2: 'sticker-AI',
+    trackClass3: 'sticker-SUNY-Korea-Only',
     prereq: 'AMS 161 or MAT 132 or MAT 127 & CSE 114 & U3 or U4 standing',
     img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details:'This course will equip students with technical foundations in AI and data science while focusing on fairness, bias mitigation, and the responsible design and deployment of AI systems. The concepts of Artificial Intelligence, data science, and data analysis for technology management are introduced. Additionally, the impact of AI on society will be reviewed and studied.'
@@ -294,7 +296,11 @@ const courses=[
     title:'The Mobile Revolution in Development',
     meta:'3 credits',
     track: 'ICT Specialization',
+    track2: 'AI Theme',
+    track3: 'SUNY Korea Only',
     trackClass: 'sticker-ict',
+    trackClass2: 'sticker-AI',
+    trackClass3: 'sticker-SUNY-Korea-Only',
     prereq: 'AMS 161 or MAT 132 or MAT 127 & EST 320 & U3 or U4 standing',
     coreq: 'CSE 114',
     img:'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -384,44 +390,68 @@ const courses=[
   }
 ];
 
-document.getElementById('courseList').innerHTML = courses.map((c, index) => `
-  <article class="course-card" id="course-card-${index}">
-    <div class="course-trigger-header" onclick="toggleCourseAccordion(${index})">
-      <div class="course-trigger-left">
-        <h3>${c.code}</h3>
-      </div>
-      <div class="course-trigger-right">
-        <span class="course-sticker ${c.trackClass}">${c.track}</span>
-  
-        ${c.track2 ? `<span class="course-sticker ${c.trackClass2}">${c.track2}</span>` : ''}
-  
-        <span class="course-toggle-icon">▼</span>
-      </div>
-    </div>
-    <div class="course-expandable-content">
-      <div class="course-inner-body">
-        <h3 class="course-main-title">${c.title}</h3>
-        <div class="course-meta">📂 ${c.meta}</div>
-        <img src="${c.img}" alt="${c.title}" class="course-img">
-        
-        <div class="course-prereq-box">
-          <strong>⚠️ Prerequisites:</strong> <span>${c.prereq}</span>
-        </div>
-        
-        <p><strong>Course Description:</strong></p>
-        <p>${c.details}</p>
-      </div>
-    </div>
-  </article>
-`).join('');
+const courseList = document.getElementById('courseList');
+if (courseList) {
+  courseList.innerHTML = courses.map((c, index) => {
+    const stickers = [];
+    if (c.track && c.trackClass) stickers.push(`<span class="course-sticker ${c.trackClass}">${c.track}</span>`);
+    if (c.track2 && c.trackClass2) stickers.push(`<span class="course-sticker ${c.trackClass2}">${c.track2}</span>`);
+    if (c.track3 && c.trackClass3) stickers.push(`<span class="course-sticker ${c.trackClass3}">${c.track3}</span>`);
 
-function toggleCourseAccordion(index) {
-    const targetCard = document.getElementById(`course-card-${index}`);
-    targetCard.classList.toggle('active-panel');
+    const prereq = c.prereq && c.prereq !== 'None' ? `<div class="course-prereq-box"><strong>Prerequisite:</strong> ${c.prereq}</div>` : '';
+    const coreq = c.coreq ? `<div class="course-additional-info" style="border-left-color:#2563eb;"><strong>Corequisite:</strong> ${c.coreq}</div>` : '';
+
+    return `
+      <article class="course-card" id="course-card-${index}">
+        <div class="course-trigger-header" onclick="toggleCourseAccordion(${index})">
+          <div class="course-trigger-left">
+            <h3>${c.code}</h3>
+          </div>
+          <div class="course-trigger-right">
+            ${stickers.join(' ')}
+            <span class="course-toggle-icon">▼</span>
+          </div>
+        </div>
+        <div class="course-expandable-content">
+          <div class="course-inner-body">
+            <h4 class="course-main-title">${c.title}</h4>
+            <div class="course-meta">${c.meta}</div>
+            <img src="${c.img}" alt="${c.title}" class="course-img">
+            ${prereq}
+            <p>${c.details}</p>
+            ${coreq}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
-function toggleSidebarMenu(itemId){document.querySelectorAll('.accordion-item').forEach(item=>item.id===itemId?item.classList.toggle('open'):item.classList.remove('open'));}
-function toggleDrawer(){const d=document.getElementById('navDrawer'),o=document.getElementById('drawerOverlay');if(d&&o){d.classList.toggle('open');o.classList.toggle('show');}}
+function toggleCourseAccordion(index) {
+  const card = document.getElementById(`course-card-${index}`);
+  if (card) {
+    card.classList.toggle('active-panel');
+  }
+}
+
+function toggleSidebarMenu(itemId) {
+  document.querySelectorAll('.accordion-item').forEach(item => {
+    if (item.id === itemId) {
+      item.classList.toggle('open');
+    } else {
+      item.classList.remove('open');
+    }
+  });
+}
+
+function toggleDrawer() {
+  const drawer = document.getElementById('navDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+  if (drawer && overlay) {
+    drawer.classList.toggle('open');
+    overlay.classList.toggle('show');
+  }
+}
 </script>
 </body>
 </html>

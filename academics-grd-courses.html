@@ -167,6 +167,13 @@
       </div>
 
       <div id="degreePanelsContainer"></div>
+      
+      <div class="global-important-note">
+          <h4>⚠️ Important Notice for All Graduate Students (BSMS after their BS, MS, PhD Students)</h4>
+          <p>
+            If a student wants to take graduate level courses from the other department and wants the courses to be considered as their technical elective requriements, the student must get the approval from the department graduate director.
+          </p>
+      </div>
 
     </div>
   </div>
@@ -1198,7 +1205,7 @@ const rawCoursesData = [
     meta: '3 credits',
     prereq: 'Enrollment in Sociology MA or Sociology PhD program, or Department Consent',
     img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course is an advanced treatment of descriptive and inferential statistics with emphasis on the latter. Students will gain practical experience in analyzing current data from the social sciences through the use of statistical computer programs. Topics include: sampling, measures of central tendency and dispersion, probability theory, hypothesis testing, point and interval estimation, the normal, binomial, and chi-square distributions, parametric and non-parametric measures of association and correlation, and bi-variate regression.'
+    details: 'This course is an advanced treatment of descriptive and inferential statistics with emphasis on the latter. Students will gain practical experience in analyzing current data from the social sciences through the use of statistical computer programs. Topics include: sampling, measures of central tendency and dispersion, probability theory, hypothesis testing, point and interval estimation, the normal, binomial, and chi-square distributions, parametric and non-parametric measures of association and correlation, and bi-variate regression. This course can be fulfilled by taking either SOC 501 or POL 501.'
   },
   {
     program: 'phd',
@@ -1208,7 +1215,7 @@ const rawCoursesData = [
     meta: '3 credits',
     prereq: 'Enrollment in Sociology MA or Sociology PhD program, or Department Consent',
     img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course provides an in-depth overview of regression analysis, primarily focused on OLS modeling. Topics include: inferences in regression analysis, dummy variables, interaction terms, and diagnostics and remedial measures. The course concludes with an introduction to other regression techniques such as logistic and probability modeling.'
+    details: 'This course provides an in-depth overview of regression analysis, primarily focused on OLS modeling. Topics include: inferences in regression analysis, dummy variables, interaction terms, and diagnostics and remedial measures. The course concludes with an introduction to other regression techniques such as logistic and probability modeling.This course can be fulfilled by taking either SOC 502 or POL 502.'
   },
   {
     program: 'phd',
@@ -1218,7 +1225,7 @@ const rawCoursesData = [
     meta: '3 credits',
     prereq: 'PPLMA, PSPMA, PPLMA/HPHMP, PPLMA/MBXMB, or permission of instructor.',
     img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course acquaints students with statistics. It begins with the basics of applied statistical analysis, including probability and hypothesis testing, and builds to simple regression analysis.'
+    details: 'This course acquaints students with statistics. It begins with the basics of applied statistical analysis, including probability and hypothesis testing, and builds to simple regression analysis. This course can be fulfilled by taking either POL 501 or SOC 501.'
   },
   {
     program: 'phd',
@@ -1228,7 +1235,7 @@ const rawCoursesData = [
     meta: '3 credits',
     prereq: 'Grade of B or higher in POL 501; admission to MA in Public Policy, MA in Political Psychology, dual MAPP/MBA, or dual MAPP/MPH; or permission of instructor.',
     img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course utilizes multiple regression analysis and explores violations of the linear model.'
+    details: 'This course utilizes multiple regression analysis and explores violations of the linear model. This course can be fulfilled by taking either POL 502 or SOC 502.'
   },
   {
     program: 'phd',
@@ -1238,14 +1245,34 @@ const rawCoursesData = [
     meta: '4 credits',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course provides students with frameworks and models for analysis of issues at the intersection of science, technology and public policy, and business strategy; and helps students develop skills to work on policy issues that require deep understanding of the technical details. Topics include utility/profit maximization theory, its limitations and alternative theories, business and government interactions, technology innovation and managements, policy process (agenda setting, problem definition, framing the terms of debate, formulation and analysis of options, evaluation of policy outcomes). Cases drawn from energy and environmental policy, educational technology, STEM education will be used to illustrate stakeholders and their value structures, high levels of uncertainty, multiple levels of complexity, and their influence on policy intervention. This course emphasizes quantitative policy analysis methods, and critical thinking. <strong>Note: Only Offered at Fall</strong>'
+    details: 'This course provides students with frameworks and models for analysis of issues at the intersection of science, technology and public policy, and business strategy; and helps students develop skills to work on policy issues that require deep understanding of the technical details. Topics include utility/profit maximization theory, its limitations and alternative theories, business and government interactions, technology innovation and managements, policy process (agenda setting, problem definition, framing the terms of debate, formulation and analysis of options, evaluation of policy outcomes). Cases drawn from energy and environmental policy, educational technology, STEM education will be used to illustrate stakeholders and their value structures, high levels of uncertainty, multiple levels of complexity, and their influence on policy intervention. This course emphasizes quantitative policy analysis methods, and critical thinking.<br><strong>Note: Only Offered at Fall</strong>'
+  },
+  {
+    program: 'phd',
+    concen: 'Ph.D. Required Foundation Courses',
+    code: 'EST 610',
+    title: 'Data Analysis for Technology, Policy and Innovation',
+    meta: '3 credits',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This course covers many of the common empirical tools used for research in Technology, Policy, and Innovation. Topics include: descriptive statistics, clustering, discrimination analysis, estimation, hypothesis testing, and regression analysis. To learn these topics, students will use modern statistical software programs to analyze data sets with socio-technological applications. After this course, students will have the tools to conduct robust data analyses and present the work in written and visually appealing formats. This course assumes that students have basic knowledge of statistics or data analysis.'
+  },
+  {
+    program: 'phd',
+    concen: 'Ph.D. Required Foundation Courses',
+    code: 'EST 625',
+    title: 'Advanced Theory and Practice in Technology and Policy',
+    meta: '3 credits',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'Technology change entails more than the commercialization of an invention. Likewise, policy making encompasses much more than cost-benefit analysis and regulation. This advanced, graduate level course examines critical theory for both subjects by drawing on ideas from systems and science, policy and management, economics, and STS. Emphasis is placed on deconstructing theoretical applications in the context of policy-based problem-solving and innovation objectives. Topics will include policy cycles, regulatory capture, innovation systems, dimensions of technology change, and lock-in, among others. Students will develop skills to work in roles at the interface of technology and management.'
   },
 ];
 
 function generateCourseCardHtml(course) {
     const prereqHtml = (course.prereq && course.prereq !== 'None') ? `<div class="course-prereq-box"><strong>Prerequisite:</strong> ${course.prereq}</div>` : '';
     const repeatableHtml = course.repeatable ? `<div class="course-additional-info"><strong>Course Notice:</strong> ${course.repeatable}</div>` : '';
-    
+
     return `
         <div class="course-card" onclick="toggleCourseCard(this, event)">
             <div class="course-trigger-header">
