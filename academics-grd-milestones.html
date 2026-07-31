@@ -67,6 +67,16 @@
     .drawer-overlay.show { display: block; }
     .nav-drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #ffffff; box-shadow: -2px 0 10px rgba(0,0,0,0.1); z-index: 2002; transition: right 0.3s ease; padding: 40px 20px; overflow-y: auto; }
     .nav-drawer.open { right: 0; }
+    .menu-category { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    .menu-category > h3 { font-size: 1.15rem; color: var(--suny-navy); padding: 10px 5px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .menu-category > h3:hover { color: var(--suny-red); }
+    .menu-category > h3 .arrow { font-size: 0.8rem; transition: transform 0.3s ease; color: #999; }
+    .menu-category.active > h3 .arrow { transform: rotate(180deg); color: var(--suny-red); }
+    .drawer-sub-menu { list-style: none; padding-left: 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .menu-category.active .drawer-sub-menu { max-height: 800px; margin-top: 5px; margin-bottom: 10px; }
+    .menu-category li { margin-bottom: 12px; }
+    .menu-category a { font-size: 0.95rem; color: #555; font-weight: 600; display: block; transition: 0.2s; }
+    .menu-category a:hover { color: var(--suny-red); padding-left: 5px; }
 
     .section-title { font-size: 1.6rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 25px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; letter-spacing: 0.5px; }
     
@@ -335,6 +345,7 @@
                             <li>Ph.D. students require continuous full-time enrollment and residency during their SBU visit semesters.</li>
                             <li><strong>SOC 501, SOC 502, POL 501, POL 502 are not offered at SUNY Korea.</strong> Students must complete these courses during their SBU visiting semesters.</li>
                             <li>Failure to pass the Qualifying Examination within the approved timeline may result in program review.</li>
+                            <li>If a Ph.D. student wants to take courses from other departments to be considered as its technical elective credit, the student must ontain an approval from the graduate program director.</li>
                         </ul>
                     </div>
                 </div>
@@ -378,5 +389,6 @@ function toggleDrawer(){
     if(d && o){ d.classList.toggle('open'); o.classList.toggle('show'); }
 }
 </script>
+<script src="menu.js"></script>
 </body>
 </html>

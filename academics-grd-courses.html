@@ -58,6 +58,10 @@
     .sub-page-header { margin-bottom: 40px; border-bottom: 3px solid var(--suny-red); padding-bottom: 15px; }
     .sub-page-header h2 { font-size: 2.2rem; color: var(--suny-navy); font-weight: 700; }
     .content-container { background: #fff; padding: 50px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,.05); }
+    .notice-box { background: #fff7d6; border: 1px solid #f0c36d; border-left: 5px solid #f4b400; border-radius: 8px; padding: 16px 18px; margin-bottom: 24px; color: #7a4a00; }
+    .notice-box h4 { font-size: 1rem; color: #8a4b00; margin-bottom: 8px; }
+    .notice-box p { font-size: 0.95rem; line-height: 1.6; margin: 0; }
+    .phd-only-note { display: none; }
     
     .section-title { font-size: 1.5rem; color: var(--suny-navy); font-weight: 700; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; text-transform: uppercase; letter-spacing: .5px; }
     .sub-section-title { font-size: 1.2rem; color: var(--suny-navy); font-weight: 700; margin: 25px 0 15px 0; display: flex; align-items: center; gap: 8px; }
@@ -112,6 +116,16 @@
     .drawer-overlay.show { display: block; }
     .nav-drawer { position: fixed; top: 0; right: -300px; width: 300px; height: 100%; background: #fff; box-shadow: -2px 0 10px rgba(0,0,0,.1); z-index: 2002; transition: right .3s ease; padding: 40px 20px; overflow-y: auto; }
     .nav-drawer.open { right: 0; }
+    .menu-category { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+    .menu-category > h3 { font-size: 1.15rem; color: var(--suny-navy); padding: 10px 5px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .menu-category > h3:hover { color: var(--suny-red); }
+    .menu-category > h3 .arrow { font-size: 0.8rem; transition: transform 0.3s ease; color: #999; }
+    .menu-category.active > h3 .arrow { transform: rotate(180deg); color: var(--suny-red); }
+    .drawer-sub-menu { list-style: none; padding-left: 15px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .menu-category.active .drawer-sub-menu { max-height: 800px; margin-top: 5px; margin-bottom: 10px; }
+    .menu-category li { margin-bottom: 12px; }
+    .menu-category a { font-size: 0.95rem; color: #555; font-weight: 600; display: block; transition: 0.2s; }
+    .menu-category a:hover { color: var(--suny-red); padding-left: 5px; }
     
     footer { background: var(--suny-navy); color: #fff; text-align: center; padding: 20px; margin-top: 60px; font-size: .9rem; }
     @media (max-width:1024px) { .sub-page-container { flex-direction: column; gap: 40px; } .left-sidebar { width: 100%; position: static; } .content-container { padding: 24px; } }
@@ -160,21 +174,12 @@
     <div class="content-container">
       <div class="section-title">Course Descriptions by Degree Program</div>
       
-      <div class="tab-menu-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 35px;">
+      <div class="tab-menu-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px;">
           <button type="button" class="spec-trigger active-tab-card" id="degree-btn-0" onclick="switchDegreeTab(0)">Accelerated BS/MS</button>
           <button type="button" class="spec-trigger" id="degree-btn-1" onclick="switchDegreeTab(1)">Master of Science (M.S.)</button>
           <button type="button" class="spec-trigger" id="degree-btn-2" onclick="switchDegreeTab(2)">Ph.D. Program</button>
       </div>
-
       <div id="degreePanelsContainer"></div>
-      
-      <div class="global-important-note">
-          <h4>⚠️ Important Notice for All Graduate Students (BSMS after their BS, MS, and PhD Students)</h4>
-          <p>
-            If a student wants to take graduate-level courses from the other department and wants the courses to be considered as their technical elective requirements, the student must get the approval from the department graduate director.
-          </p>
-      </div>
-
     </div>
   </div>
 </div>
@@ -192,6 +197,7 @@ const rawCoursesData = [
     track: 'Core Required',
     trackClass: 'sticker-core',
     prereq: 'None',
+    repeatable: 'May be repeated 1 times FOR credit.',
     img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'In this course, we review current and classic concepts and theories in leading in engineering contexts. We examine leadership at different levels: leading groups and teams, leading projects, and leading complex organizations. We consider seminal questions in leadership studies including: What are the differences between managing and leading? How do leadership styles interact for effective leadership? How do leaders build community in their organizations? And we review several practical concerns of leadership, including leading change, leading in diverse contexts, and leader succession planning.'
   },
@@ -246,7 +252,20 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'BS/MS Core Required Courses',
+    code: 'EST 598',
+    title: 'Master’s Project in Technology and Society',
+    meta: 'S/U grading',
+    track: 'Core Required',
+    trackClass: 'sticker-core',
+    prereq: 'None',
+    repeatable: 'May be repeated for credit.',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This course requires direct supervision by a member of DTS faculty. Students work independently to complete their master’s project. Students typically address the MS project in three ways: 1) a literature search on a technical area relating to their concentration; 2) a project that combines content from two or more course; 3) a work related problem that requires additional technical information or training.'
+  },
+  {
+    program: 'bsms',
+    concen: 'Technology Management',
     code: 'EMP 502',
     title: 'Engineering Economics',
     meta: '3 credits',
@@ -257,7 +276,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EMP 504',
     title: 'Quantitative Methods in Management',
     meta: '3 credits',
@@ -268,7 +287,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EMP 506',
     title: 'Strategic Technology Analysis',
     meta: '3 credits',
@@ -279,7 +298,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EMP 517',
     title: 'Quality and Value Management',
     meta: '3 credits',
@@ -290,7 +309,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EMP 518',
     title: 'Project Management',
     meta: '3 credits',
@@ -301,7 +320,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EMP 532',
     title: 'Big Data Systems for Technology Management',
     meta: '3 credits',
@@ -312,7 +331,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EST 519',
     title: 'Systems Engineering Management',
     meta: '3 credits',
@@ -323,7 +342,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EST 569',
     title: 'Technology in the City',
     meta: '3 credits',
@@ -334,7 +353,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EST 598',
     title: 'Master’s Project in Technology and Society',
     meta: '3 credits',
@@ -346,7 +365,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EST 599',
     title: 'Special Projects and Topics',
     meta: '1-12 credits',
@@ -357,7 +376,7 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EST 605',
     title: 'Economics and Public Policy',
     meta: '3 credits',
@@ -368,132 +387,132 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 535',
     title: 'Electric Power Systems',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Electric power system is at the center of achieving mid-century carbon neutrality to address climate change. This course deals with the physics, design, plan, and operation of the electric power systems, essentially the power grid. We will first discuss the engineering principles of the electric power systems. We will cover the basic components of electric power systems, including generation technologies, transmission and distribution, electricity loads, transformers, and safety equipment. We will then discuss the design and operation of the power systems. We will cover power system planning, power system operation and control, and emerging technical and policy issues in the electricity industry.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 536',
     title: 'Resilience in Urban Environments',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Resilience lacks a universally agreed-upon definition, in part due to its multi-dimensional nature that crosses disciplines, and this inconsistency in terminology and framing is reflected in current research. For this course, we adopt a newer, more dynamic framing of resilience that incorporates change and adaptation: Cities and buildings are operated by social actors; they may be stationary engineering structures, but they are not static, and during a disruption they evolve and change based on the decisions made by people. Thus, this class focuses on conceptual and theoretical frameworks for resilience but applies them to important social science questions in the urban built environment, such as vulnerability, decision making, risk perception, organizational behavior, and policy formation.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 558',
     title: 'Digital Technologies in Disaster Risk Reduction',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This seminar surveys major topics in the emerging field of digital technology management for disaster risk reduction. The first several weeks of the course introduce major perspectives and conceptual approaches to understanding the new role of digital technologies in disaster risk reduction. Subsequently, the course focuses on more specific topics including the evolution of next-generation public safety networks, innovation and such digital technologies as robotics, augmented and virtual reality, big data, mobility, block chain and artificial intelligence.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 559',
     title: 'Mobile Revolution in Disaster Risk Reduction',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course explore three themes: [1] current and future trends of three major mobile technologies applied to disaster risk reduction (ICT, [mobile phones, service apps, Remote GIS, GPS], energy [batteries, microgrids], and other technologies increasingly repurposed and adapted toward mobility (drones, ad hoc networks, base stations, wearables, loT, smart grids), [2] combined with proven tactics to achieve successful collaborative disaster management and trust relationships between three groups (government/corporate ‘big data’ aggregation and sharing, emergency response personnel, and local knowledge of citizens, NGOs, businesses, and volunteers), [3] in order to effectively reduce vulnerability and inequality before, during, or after natural hazards and/or human disasters toward a goal of more resilient, equitable, sustainable development.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 569',
     title: 'Technology in the City',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Urban technology includes exciting IT processes and breakthroughs and also mundane but necessary infrastructure such as sewage treatment and traffic control. In this course we will discuss some basic elements of traditional urban technology and examine how modern electronic and information processing technologies have changed and are continuing to change these processes: how the smart City has been and will continue to be implemented. There will be a focus on information and its role in driving innovation but physical improvements to engineering designs will also be considered. Technological lock-in due to structural choices and sunk costs will be a course theme. Course content will change depending on tour opportunities. There are extra course costs for train-subway tickets and field trip lunches.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 578',
     title: 'Interactive Multimedia Curriculum Design and Development',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Principles of human-computer interaction applied to the design of educational courseware.  Usability engineering, with a focus on the audience and learning objectives.  Interface design principles.  Human computer dialogs.  Multimedia as a communication tool, using images, audio and video.  Multimodal input devices and strategies.  Students will use a multimedia authoring tool to create a prototype of an educational application or learning tool.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 579',
     title: 'Educational Games',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Simulations and computer games as a learning tool. Traditional game and simulation genres, and their appropriate uses in education. Gameplay design. Game development process, from storyboarding to delivery. Assessing games as learning tools. Students will use a multimedia tool to prototype an educational game or simulation of their own design.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 583',
     title: 'National Energy Decision Making',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'The Course approaches Energy Decision Making through a wide perspective of countries, cities, corporations, facilities and homes. The course will provide tools to analyze the energy use for different entities including governments, corporations and individuals. It will provide a framework to analyze both the choices and constraints of sources and uses of energy. The course is a practical overview of techniques and processes useful for people who will have decision-making responsibilities for energy systems in policy, business or engineering domains.<strong>Note: Only Offered at Fall</strong>'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 592',
     title: 'Sustainable Energy: Technologies, Systems, Markets, and Policies',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'The ample supply and appropriate use of energy is critical to the well being of human society. Energy plays an enormous role in environmental degradation, national insecurity, international conflict, and in solutions to these problems. This course aims to introduce the major energy issues to students in engineering, business, and public policy areas. It discusses the energy choices to meet regional and global energy needs. Major renewable and conventional energy sources, energy supply technologies, and end-use efficiency options will be assessed in the context of political, social, economic, and environmental goals.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 593',
     title: 'Risk Assessment and Hazard Management',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'An introduction to the methods and techniques for assessing and managing risks to humans and the environment from natural and technological hazards. The course consists of lectures and readings on risk assessment and hazard management and discussions of published case studies. Students will conduct their own case studies and present them in oral and written reports.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 597',
     title: 'Waste Management: Systems and Principles',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Integrated municipal waste management and zero waste concepts. Technologies and policy options in waste management: recycling, incineration, landfilling, and source reduction, including extended producer responsibility and pay-as-you throw. How regulation, economics, environmental impacts, and public perception affect policy and technology selections. Specific regional implementations and planned projects.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 598',
     title: 'Master’s Project in Technology and Society',
     meta: '- credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -501,11 +520,11 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 599',
     title: 'Special Projects and Topics',
     meta: '1-12 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -513,66 +532,66 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 605',
     title: 'Economics and Public Policy',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course focuses on theoretical economic concepts and their planning and policy applications, and it is structured as an introductory-level survey of economics. This course covers foundations of microeconomics including supply & demand, elasticity, market efficiency, externalities, and public goods. We then expand to key concepts in environmental economics, urban economics, and macroeconomics, and will discuss recent challenges to neoclassical economic theory, such as behavioral economics. Importantly, the connection to policy implementation and practical societal challenges will be heavily stressed.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 694',
     title: 'Energy and Buildings: Technology, Policy, and Behavior',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Buildings consume vast amounts of energy and resources, and are one of the largest contributors to greenhouse gas emissions. Major advances in building design and technology over the past decade have given us tools to make buildings more energy efficient, but buildings lag far behind their potential. There are many avenues to green the built environment sector, including technological innovations, occupant behavior programs, retrofits of existing buildings, and innovative building codes. Ultimately, reducing energy consumption in the building stock will require an interdisciplinary approach and some combination of a range of program and policy types. This course will introduce students to the many interdisciplinary issues surrounding energy use in buildings, with a particular focus on the intersection of policy with technology, economics, social science, and behavior. The course will combine lectures, student-led discussions, guest speaker(s) and field trip(s) to green buildings, depending on scheduling.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 530',
     title: 'Intro of Big Data & Data Science for Technological Management',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course is an introduction to big data techniques, its applications and its challenges. We will analyze customer relationship management processes using software management tools such as DFD and UML and Lean & Six Sigma management to improve applications or services in a cloud computing environment. Data modeling, mining and visualization tools will be introduced for developing business intelligence, predictive analytics and decision support applications. Technologies in related areas such as data warehousing, data sharing, data security, networking, and operating systems will also be included to support big data applications in cloud computing environments.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 524',
     title: 'The Role of Educational Technology Specialist',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'In this course students will learn the role and responsibilities of an Educational Technology Specialist. Students will research new educational technologies and resources that enhance classroom learning. They will learn how to navigate the social, political, ethical and legal issues surrounding educational technology. Students will learn how to provide ongoing professional development which includes scheduling and conducting workshops, push-ins and individual appointments, and working with educators to develop lesson plans and student projects. Students will learn how to infuse the ISTE Standards and the ideology of the National Technology Plan into curriculum and learn to assess the effectiveness of student learning using technology in the classroom. Throughout the course students will work the instructor to: develop a plan for future integration of technology into the curriculum addressing specific needs, develop a data driven needs assessment based on current goals and technology available, incorporate the best model for the specific group of educators and decide on a focus for technology integration using workshops, push-ins or one-on-one sessions to deliver instruction. The culminating activity for this course is the submission of a year-long technology integration plan.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 532',
     title: 'Programming and Data Structures for Educators',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Introduction to procedural and object-oriented programming methodology and basic data structures. Topics include program structure, conditional and iterative programming, procedures, arrays, object classes, encapsulation, information hiding, inheritance, polymorphism, file I/O, exceptions and simple data structures, such as lists, queues and stacks.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 533',
     title: 'Principles of Cybersecurity for Educators',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     repeatable: 'May be repeated up to 6 credits',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -580,99 +599,99 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 565',
     title: 'Foundations of Technology in Education',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Throughout this course students will explore the basic pedagogical issues and social impact of using technology in education. This course examines the basic principles of integrating technology and computer applications into the curriculum. Students will learn how to use and integrate word processing, spreadsheet, and presentation applications for educator planning and student project work. Students will also learn how to use a number of online based applications within school curriculum. The culminating activity for this course is the design and a presentation of a micro-lesson using one these applications as they would in the classroom.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 568',
     title: 'Networked Communication Technologies',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'EST 568 Network Communication Wired and Wireless This course examines the range of technologies used in teaching, learning, and communication. Instructional technologies both stand-alone and networked are surveyed with a focus on how they can be used effectively to enhance learning. Students will learn fundamental hardware and software principles underlying the development of the Internet and other networked communications tools. Emphasis will be placed on assessment of these technologies in terms of societal impacts and learning outcomes. This course combines topics from EST 565 and EST 567. <strong>Note: Offered at Fall, Spring, and Summer</strong>'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 570',
     title: 'Educational Technology Lesson Development',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'In this course students will learn principles of instructional design and how to fully integrate technology into daily curriculum. Throughout the course students will plan, develop and evaluate a lesson plan that demonstrates an expertise in the integration of educational technology. Students will apply the skills, techniques, resources and research necessary to effectively create an educational technology inspired lesson plan. The lesson plan may include the use of emerging technologies, distance learning, multimedia projects, collaborative environments, computer applications and Internet resources. The culminating project for this course is the completion of a lesson plan in a specific content area that incorporates multiple modalities of technology into pedagogical practices.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 571',
     title: 'Educational Technology Research Methods',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course evaluates the impact and value of educational technology through detailed research based on a number of current topics. Course goals include understanding research methodology and literature and exploring assessment design and implementation. The course includes class discussions and project work based on student learning with technology, access and the digital divide, the National Education Technology Plan, Internet literacy, emerging technologies, virtual schools, and data driven research.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 572',
     title: 'Intelligent Computing',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Introduction to foundations of modern artificial intelligence (AI) and key ideas andtechniques underlying the design of intelligent computer systems. Topics include search, game playing, logic, machine learning, deep learning, natural language processing, robotics and image processing. Practical use of AI in modern applications and reasoning about AI problems are stressed. Students will use a variety of modern AI tools the many uses of AI in education. This course is designed for educators who need to understand the capabilities, and limitations, of modern AI systems. This will enable them to effectively select and use AI tools, and teach their students how to use those tools responsibly. The course does not expect students to be skilled programmers or engineers.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 573',
     title: 'Interactive Multimedia Curriculum Design and Development',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course allows students to learn how to use a variety of multimedia tools for the classroom. Principles of user interface and interaction design will be covered. Throughout the course students design an interactive unit plan using multimedia authoring software. Students will work with audio/video editing software, collaborative learning software, and learn how to embed online games, activities and video within their unit plan. Development of the interactive multimedia unit requires students to: submit a proposal, use graphic organizers to plan and design, create a draft version, create assessment tools, test market with a specific target audience, then evaluate the unit before the final version is completed. The culminating activity is the presentation and delivery of the finished interactive multimedia unit.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 574',
     title: 'Distance Learning and Virtual Environments',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Web-based distance learning applications are quickly growing within higher education institutions, K-12 schools, and corporate environments. The focus of this course is on the underlying theories, design, and implementation of effective modes of elearning. Students will explore virtual schools, virtual learning, virtual environments and other forms of distance education. The social differences between face-to-face and virtual learning will also be examined and discussed throughout the course. Students will explore virtual learning resources and design their own virtual learning lesson. The culminating project for this course will be the demonstration and write up of the experience.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 579',
     title: 'Educational Games',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Simulations and computer games as a learning tool. Traditional game and simulation genres, and their appropriate uses in education. Gameplay design. Game development process, from storyboarding to delivery. Assessing games as learning tools. Students will use a multimedia tool to prototype an educational game or simulation of their own design.'
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 598',
     title: 'Master’s Project in Technology and Society',
     meta: '- credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Concentration: Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -680,11 +699,11 @@ const rawCoursesData = [
   },
   {
     program: 'bsms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 599',
     title: 'Special Projects and Topics',
     meta: '1-12 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Concentration: Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -699,6 +718,7 @@ const rawCoursesData = [
     track: 'Core Required',
     trackClass: 'sticker-core',
     prereq: 'None',
+    repeatable: 'May be repeated 1 times FOR credit.',
     img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'In this course, we review current and classic concepts and theories in leading in engineering contexts. We examine leadership at different levels: leading groups and teams, leading projects, and leading complex organizations. We consider seminal questions in leadership studies including: What are the differences between managing and leading? How do leadership styles interact for effective leadership? How do leaders build community in their organizations? And we review several practical concerns of leadership, including leading change, leading in diverse contexts, and leader succession planning.'
   },
@@ -753,99 +773,12 @@ const rawCoursesData = [
   },
   {
     program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EMP 502',
-    title: 'Engineering Economics',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This is a course in advanced cost justifications for business and projects. The objective is to give the student a better understanding of what is required to justify, budget, plan and carry out technological projects in industry today. The student will also understand how management decisions are influenced by financial analysis when making budgetary project plans.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EMP 504',
-    title: 'Quantitative Methods in Management',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course is a rapid introduction to the application of modern mathematical concepts and techniques in management science.  Algebraic operations, mathematical functions and their graphical representation, and model formulation are reviewed. Topics covered include the following: algebraic and graphic methods of linear programming; PERT, CPM, and other network models; and inventory theory. Simple management-oriented examples are used to introduce mathematical formulations and extensions to more general problems. The computer laboratory may be used to give students experience with PC software packages that solve problems in all course topics. Interpretation of computer outputs is also stressed. We will also discuss several quantitative methods for analyzing and controlling cost, lead time, and quality of the goods or services being produced.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EMP 506',
-    title: 'Strategic Technology Analysis',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This course is a rapid introduction to the application of modern mathematical concepts and techniques in management science and the foundation for an understanding of Operations Management principles for Engineers.  Algebraic operations, mathematical functions and their graphical representation, and model formulation are reviewed. Topics and quantitative methods covered, include the following: algebraic and graphic methods of linear programming; PERT, CPM, cost controls, Enterprise Resource Planning (ERP), lead-time, inventory, just-in-time systems, quality control and other network models for product goods or services as well as facility location and plant layout analysis, and project management.  Simple management-oriented examples are used to introduce mathematical formulations and extensions to more general problems.  The “Value Chain” process will be fully investigated and analyzed thru the; design, forecasting,  supply chain, production and quality control stages.  This is the process of creating company equity by transforming ideas and materials into true value-added, goods and services for stakeholders. Computer laboratories may be used to give students experience with PC software packages that solve problems in all course topics.  The interpretation of computer outputs is also stressed.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EMP 517',
-    title: 'Quality and Value Management',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'Management’s approach to quality has changed radically; this course explains why and how. It covers methods used by both manufacturing and service organizations to achieve high quality: how each organizational function is involved in quality; how improving quality can reduce costs; importance of communication; importance of involving all employees; need to measure quality; and introduction to statistical quality control and how it is used.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EMP 518',
-    title: 'Project Management',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'This is a course in project management.  The objective is to give the student a fundamental understanding of what is required to plan organize and carry out projects in industry today. The student will also understand how management decisions are influenced by project and financial analysis when making project plans.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EMP 532',
-    title: 'Big Data Systems for Technology Management',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'Over the past two decades, the amount of data that is generated has grown exponentially and there is an increasing need to analyze all this data. This class will introduce students to the statistical software R, data analysis, text mining, and big data analyses.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EST 519',
-    title: 'Systems Engineering Management',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'Systems engineering (SE) establishes the technical framework for delivering material capabilities to the customer. SE provides the foundation upon which everything else is built and supports program success. SE ensures the effective development and delivery of capability through the implementation of a balanced approach with respect to cost, schedule, performance and risk, using integrated, disciplined and consistent SE activities and processes regardless of when a program enters the developmental life cycle.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
-    code: 'EST 569',
-    title: 'Technology in the City',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
-    prereq: 'None',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    details: 'Urban technology includes exciting IT processes and breakthroughs and also mundane but necessary infrastructure such as sewage treatment and traffic control. In this course we will discuss some basic elements of traditional urban technology and examine how modern electronic and information processing technologies have changed and are continuing to change these processes: how the smart City has been and will continue to be implemented. There will be a focus on information and its role in driving innovation but physical improvements to engineering designs will also be considered. Technological lock-in due to structural choices and sunk costs will be a course theme. Course content will change depending on tour opportunities. There are extra course costs for train-subway tickets and field trip lunches.'
-  },
-  {
-    program: 'ms',
-    concen: 'Concentration: Technology Management',
+    concen: 'MS Core Required Courses',
     code: 'EST 598',
     title: 'Master’s Project in Technology and Society',
-    meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
+    meta: 'S/U grading',
+    track: 'Core Required',
+    trackClass: 'sticker-core',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -853,154 +786,254 @@ const rawCoursesData = [
   },
   {
     program: 'ms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
+    code: 'EMP 502',
+    title: 'Engineering Economics',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This is a course in advanced cost justifications for business and projects. The objective is to give the student a better understanding of what is required to justify, budget, plan and carry out technological projects in industry today. The student will also understand how management decisions are influenced by financial analysis when making budgetary project plans.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EMP 504',
+    title: 'Quantitative Methods in Management',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This course is a rapid introduction to the application of modern mathematical concepts and techniques in management science.  Algebraic operations, mathematical functions and their graphical representation, and model formulation are reviewed. Topics covered include the following: algebraic and graphic methods of linear programming; PERT, CPM, and other network models; and inventory theory. Simple management-oriented examples are used to introduce mathematical formulations and extensions to more general problems. The computer laboratory may be used to give students experience with PC software packages that solve problems in all course topics. Interpretation of computer outputs is also stressed. We will also discuss several quantitative methods for analyzing and controlling cost, lead time, and quality of the goods or services being produced.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EMP 506',
+    title: 'Strategic Technology Analysis',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This course is a rapid introduction to the application of modern mathematical concepts and techniques in management science and the foundation for an understanding of Operations Management principles for Engineers.  Algebraic operations, mathematical functions and their graphical representation, and model formulation are reviewed. Topics and quantitative methods covered, include the following: algebraic and graphic methods of linear programming; PERT, CPM, cost controls, Enterprise Resource Planning (ERP), lead-time, inventory, just-in-time systems, quality control and other network models for product goods or services as well as facility location and plant layout analysis, and project management.  Simple management-oriented examples are used to introduce mathematical formulations and extensions to more general problems.  The “Value Chain” process will be fully investigated and analyzed thru the; design, forecasting,  supply chain, production and quality control stages.  This is the process of creating company equity by transforming ideas and materials into true value-added, goods and services for stakeholders. Computer laboratories may be used to give students experience with PC software packages that solve problems in all course topics.  The interpretation of computer outputs is also stressed.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EMP 517',
+    title: 'Quality and Value Management',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'Management’s approach to quality has changed radically; this course explains why and how. It covers methods used by both manufacturing and service organizations to achieve high quality: how each organizational function is involved in quality; how improving quality can reduce costs; importance of communication; importance of involving all employees; need to measure quality; and introduction to statistical quality control and how it is used.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EMP 518',
+    title: 'Project Management',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This is a course in project management.  The objective is to give the student a fundamental understanding of what is required to plan organize and carry out projects in industry today. The student will also understand how management decisions are influenced by project and financial analysis when making project plans.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EMP 532',
+    title: 'Big Data Systems for Technology Management',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'Over the past two decades, the amount of data that is generated has grown exponentially and there is an increasing need to analyze all this data. This class will introduce students to the statistical software R, data analysis, text mining, and big data analyses.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EST 519',
+    title: 'Systems Engineering Management',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'Systems engineering (SE) establishes the technical framework for delivering material capabilities to the customer. SE provides the foundation upon which everything else is built and supports program success. SE ensures the effective development and delivery of capability through the implementation of a balanced approach with respect to cost, schedule, performance and risk, using integrated, disciplined and consistent SE activities and processes regardless of when a program enters the developmental life cycle.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EST 569',
+    title: 'Technology in the City',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'Urban technology includes exciting IT processes and breakthroughs and also mundane but necessary infrastructure such as sewage treatment and traffic control. In this course we will discuss some basic elements of traditional urban technology and examine how modern electronic and information processing technologies have changed and are continuing to change these processes: how the smart City has been and will continue to be implemented. There will be a focus on information and its role in driving innovation but physical improvements to engineering designs will also be considered. Technological lock-in due to structural choices and sunk costs will be a course theme. Course content will change depending on tour opportunities. There are extra course costs for train-subway tickets and field trip lunches.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
+    code: 'EST 598',
+    title: 'Master’s Project in Technology and Society',
+    meta: '3 credits',
+    track: 'Technology Management Elective',
+    prereq: 'None',
+    repeatable: 'May be repeated for credit.',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    details: 'This course requires direct supervision by a member of DTS faculty. Students work independently to complete their master’s project. Students typically address the MS project in three ways: 1) a literature search on a technical area relating to their concentration; 2) a project that combines content from two or more course; 3) a work related problem that requires additional technical information or training.'
+  },
+  {
+    program: 'ms',
+    concen: 'Technology Management',
     code: 'EST 599',
     title: 'Special Projects and Topics',
     meta: '1-12 credits',
-    track: 'Concentration: Technology Management Elective',
+    track: 'Technology Management Elective',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'A technology assessment laboratory for emerging problems and focused research. May be run as a hands-on, group research study of an important educational, environmental or waste problem (perhaps to provide an assessment to a regulatory agency or administrative system).'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Technology Management',
+    concen: 'Technology Management',
     code: 'EST 605',
     title: 'Economics and Public Policy',
     meta: '3 credits',
-    track: 'Concentration: Technology Management Elective',
+    track: 'Technology Management Elective',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course focuses on theoretical economic concepts and their planning and policy applications, and it is structured as an introductory-level survey of economics. This course covers foundations of microeconomics including supply & demand, elasticity, market efficiency, externalities, and public goods. We then expand to key concepts in environmental economics, urban economics, and macroeconomics, and will discuss recent challenges to neoclassical economic theory, such as behavioral economics. Importantly, the connection to policy implementation and practical societal challenges will be heavily stressed.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 535',
     title: 'Electric Power Systems',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Electric power system is at the center of achieving mid-century carbon neutrality to address climate change. This course deals with the physics, design, plan, and operation of the electric power systems, essentially the power grid. We will first discuss the engineering principles of the electric power systems. We will cover the basic components of electric power systems, including generation technologies, transmission and distribution, electricity loads, transformers, and safety equipment. We will then discuss the design and operation of the power systems. We will cover power system planning, power system operation and control, and emerging technical and policy issues in the electricity industry.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 536',
     title: 'Resilience in Urban Environments',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Resilience lacks a universally agreed-upon definition, in part due to its multi-dimensional nature that crosses disciplines, and this inconsistency in terminology and framing is reflected in current research. For this course, we adopt a newer, more dynamic framing of resilience that incorporates change and adaptation: Cities and buildings are operated by social actors; they may be stationary engineering structures, but they are not static, and during a disruption they evolve and change based on the decisions made by people. Thus, this class focuses on conceptual and theoretical frameworks for resilience but applies them to important social science questions in the urban built environment, such as vulnerability, decision making, risk perception, organizational behavior, and policy formation.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 558',
     title: 'Digital Technologies in Disaster Risk Reduction',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This seminar surveys major topics in the emerging field of digital technology management for disaster risk reduction. The first several weeks of the course introduce major perspectives and conceptual approaches to understanding the new role of digital technologies in disaster risk reduction. Subsequently, the course focuses on more specific topics including the evolution of next-generation public safety networks, innovation and such digital technologies as robotics, augmented and virtual reality, big data, mobility, block chain and artificial intelligence.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 559',
     title: 'Mobile Revolution in Disaster Risk Reduction',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course explore three themes: [1] current and future trends of three major mobile technologies applied to disaster risk reduction (ICT, [mobile phones, service apps, Remote GIS, GPS], energy [batteries, microgrids], and other technologies increasingly repurposed and adapted toward mobility (drones, ad hoc networks, base stations, wearables, loT, smart grids), [2] combined with proven tactics to achieve successful collaborative disaster management and trust relationships between three groups (government/corporate ‘big data’ aggregation and sharing, emergency response personnel, and local knowledge of citizens, NGOs, businesses, and volunteers), [3] in order to effectively reduce vulnerability and inequality before, during, or after natural hazards and/or human disasters toward a goal of more resilient, equitable, sustainable development.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 569',
     title: 'Technology in the City',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Urban technology includes exciting IT processes and breakthroughs and also mundane but necessary infrastructure such as sewage treatment and traffic control. In this course we will discuss some basic elements of traditional urban technology and examine how modern electronic and information processing technologies have changed and are continuing to change these processes: how the smart City has been and will continue to be implemented. There will be a focus on information and its role in driving innovation but physical improvements to engineering designs will also be considered. Technological lock-in due to structural choices and sunk costs will be a course theme. Course content will change depending on tour opportunities. There are extra course costs for train-subway tickets and field trip lunches.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 578',
     title: 'Interactive Multimedia Curriculum Design and Development',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Principles of human-computer interaction applied to the design of educational courseware.  Usability engineering, with a focus on the audience and learning objectives.  Interface design principles.  Human computer dialogs.  Multimedia as a communication tool, using images, audio and video.  Multimodal input devices and strategies.  Students will use a multimedia authoring tool to create a prototype of an educational application or learning tool.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 579',
     title: 'Educational Games',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Simulations and computer games as a learning tool. Traditional game and simulation genres, and their appropriate uses in education. Gameplay design. Game development process, from storyboarding to delivery. Assessing games as learning tools. Students will use a multimedia tool to prototype an educational game or simulation of their own design.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 583',
     title: 'National Energy Decision Making',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'The Course approaches Energy Decision Making through a wide perspective of countries, cities, corporations, facilities and homes. The course will provide tools to analyze the energy use for different entities including governments, corporations and individuals. It will provide a framework to analyze both the choices and constraints of sources and uses of energy. The course is a practical overview of techniques and processes useful for people who will have decision-making responsibilities for energy systems in policy, business or engineering domains.<strong>Note: Only Offered at Fall</strong>'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 592',
     title: 'Sustainable Energy: Technologies, Systems, Markets, and Policies',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'The ample supply and appropriate use of energy is critical to the well being of human society. Energy plays an enormous role in environmental degradation, national insecurity, international conflict, and in solutions to these problems. This course aims to introduce the major energy issues to students in engineering, business, and public policy areas. It discusses the energy choices to meet regional and global energy needs. Major renewable and conventional energy sources, energy supply technologies, and end-use efficiency options will be assessed in the context of political, social, economic, and environmental goals.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 593',
     title: 'Risk Assessment and Hazard Management',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'An introduction to the methods and techniques for assessing and managing risks to humans and the environment from natural and technological hazards. The course consists of lectures and readings on risk assessment and hazard management and discussions of published case studies. Students will conduct their own case studies and present them in oral and written reports.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 597',
     title: 'Waste Management: Systems and Principles',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Integrated municipal waste management and zero waste concepts. Technologies and policy options in waste management: recycling, incineration, landfilling, and source reduction, including extended producer responsibility and pay-as-you throw. How regulation, economics, environmental impacts, and public perception affect policy and technology selections. Specific regional implementations and planned projects.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 598',
     title: 'Master’s Project in Technology and Society',
     meta: '- credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -1008,11 +1041,11 @@ const rawCoursesData = [
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 599',
     title: 'Special Projects and Topics',
     meta: '1-12 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -1020,66 +1053,66 @@ const rawCoursesData = [
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 605',
     title: 'Economics and Public Policy',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course focuses on theoretical economic concepts and their planning and policy applications, and it is structured as an introductory-level survey of economics. This course covers foundations of microeconomics including supply & demand, elasticity, market efficiency, externalities, and public goods. We then expand to key concepts in environmental economics, urban economics, and macroeconomics, and will discuss recent challenges to neoclassical economic theory, such as behavioral economics. Importantly, the connection to policy implementation and practical societal challenges will be heavily stressed.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Resilience and Sustainability',
+    concen: 'Resilience and Sustainability (Not available at SUNY Korea)',
     code: 'EST 694',
     title: 'Energy and Buildings: Technology, Policy, and Behavior',
     meta: '3 credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Buildings consume vast amounts of energy and resources, and are one of the largest contributors to greenhouse gas emissions. Major advances in building design and technology over the past decade have given us tools to make buildings more energy efficient, but buildings lag far behind their potential. There are many avenues to green the built environment sector, including technological innovations, occupant behavior programs, retrofits of existing buildings, and innovative building codes. Ultimately, reducing energy consumption in the building stock will require an interdisciplinary approach and some combination of a range of program and policy types. This course will introduce students to the many interdisciplinary issues surrounding energy use in buildings, with a particular focus on the intersection of policy with technology, economics, social science, and behavior. The course will combine lectures, student-led discussions, guest speaker(s) and field trip(s) to green buildings, depending on scheduling.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 530',
     title: 'Intro of Big Data & Data Science for Technological Management',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course is an introduction to big data techniques, its applications and its challenges. We will analyze customer relationship management processes using software management tools such as DFD and UML and Lean & Six Sigma management to improve applications or services in a cloud computing environment. Data modeling, mining and visualization tools will be introduced for developing business intelligence, predictive analytics and decision support applications. Technologies in related areas such as data warehousing, data sharing, data security, networking, and operating systems will also be included to support big data applications in cloud computing environments.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 524',
     title: 'The Role of Educational Technology Specialist',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'In this course students will learn the role and responsibilities of an Educational Technology Specialist. Students will research new educational technologies and resources that enhance classroom learning. They will learn how to navigate the social, political, ethical and legal issues surrounding educational technology. Students will learn how to provide ongoing professional development which includes scheduling and conducting workshops, push-ins and individual appointments, and working with educators to develop lesson plans and student projects. Students will learn how to infuse the ISTE Standards and the ideology of the National Technology Plan into curriculum and learn to assess the effectiveness of student learning using technology in the classroom. Throughout the course students will work the instructor to: develop a plan for future integration of technology into the curriculum addressing specific needs, develop a data driven needs assessment based on current goals and technology available, incorporate the best model for the specific group of educators and decide on a focus for technology integration using workshops, push-ins or one-on-one sessions to deliver instruction. The culminating activity for this course is the submission of a year-long technology integration plan.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 532',
     title: 'Programming and Data Structures for Educators',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Introduction to procedural and object-oriented programming methodology and basic data structures. Topics include program structure, conditional and iterative programming, procedures, arrays, object classes, encapsulation, information hiding, inheritance, polymorphism, file I/O, exceptions and simple data structures, such as lists, queues and stacks.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 533',
     title: 'Principles of Cybersecurity for Educators',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     repeatable: 'May be repeated up to 6 credits',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -1087,99 +1120,99 @@ const rawCoursesData = [
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 565',
     title: 'Foundations of Technology in Education',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Throughout this course students will explore the basic pedagogical issues and social impact of using technology in education. This course examines the basic principles of integrating technology and computer applications into the curriculum. Students will learn how to use and integrate word processing, spreadsheet, and presentation applications for educator planning and student project work. Students will also learn how to use a number of online based applications within school curriculum. The culminating activity for this course is the design and a presentation of a micro-lesson using one these applications as they would in the classroom.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 568',
     title: 'Networked Communication Technologies',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'EST 568 Network Communication Wired and Wireless This course examines the range of technologies used in teaching, learning, and communication. Instructional technologies both stand-alone and networked are surveyed with a focus on how they can be used effectively to enhance learning. Students will learn fundamental hardware and software principles underlying the development of the Internet and other networked communications tools. Emphasis will be placed on assessment of these technologies in terms of societal impacts and learning outcomes. This course combines topics from EST 565 and EST 567. <strong>Note: Offered at Fall, Spring, and Summer</strong>'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 570',
     title: 'Educational Technology Lesson Development',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'In this course students will learn principles of instructional design and how to fully integrate technology into daily curriculum. Throughout the course students will plan, develop and evaluate a lesson plan that demonstrates an expertise in the integration of educational technology. Students will apply the skills, techniques, resources and research necessary to effectively create an educational technology inspired lesson plan. The lesson plan may include the use of emerging technologies, distance learning, multimedia projects, collaborative environments, computer applications and Internet resources. The culminating project for this course is the completion of a lesson plan in a specific content area that incorporates multiple modalities of technology into pedagogical practices.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 571',
     title: 'Educational Technology Research Methods',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course evaluates the impact and value of educational technology through detailed research based on a number of current topics. Course goals include understanding research methodology and literature and exploring assessment design and implementation. The course includes class discussions and project work based on student learning with technology, access and the digital divide, the National Education Technology Plan, Internet literacy, emerging technologies, virtual schools, and data driven research.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 572',
     title: 'Intelligent Computing',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Introduction to foundations of modern artificial intelligence (AI) and key ideas andtechniques underlying the design of intelligent computer systems. Topics include search, game playing, logic, machine learning, deep learning, natural language processing, robotics and image processing. Practical use of AI in modern applications and reasoning about AI problems are stressed. Students will use a variety of modern AI tools the many uses of AI in education. This course is designed for educators who need to understand the capabilities, and limitations, of modern AI systems. This will enable them to effectively select and use AI tools, and teach their students how to use those tools responsibly. The course does not expect students to be skilled programmers or engineers.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 573',
     title: 'Interactive Multimedia Curriculum Design and Development',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'This course allows students to learn how to use a variety of multimedia tools for the classroom. Principles of user interface and interaction design will be covered. Throughout the course students design an interactive unit plan using multimedia authoring software. Students will work with audio/video editing software, collaborative learning software, and learn how to embed online games, activities and video within their unit plan. Development of the interactive multimedia unit requires students to: submit a proposal, use graphic organizers to plan and design, create a draft version, create assessment tools, test market with a specific target audience, then evaluate the unit before the final version is completed. The culminating activity is the presentation and delivery of the finished interactive multimedia unit.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 574',
     title: 'Distance Learning and Virtual Environments',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Web-based distance learning applications are quickly growing within higher education institutions, K-12 schools, and corporate environments. The focus of this course is on the underlying theories, design, and implementation of effective modes of elearning. Students will explore virtual schools, virtual learning, virtual environments and other forms of distance education. The social differences between face-to-face and virtual learning will also be examined and discussed throughout the course. Students will explore virtual learning resources and design their own virtual learning lesson. The culminating project for this course will be the demonstration and write up of the experience.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 579',
     title: 'Educational Games',
     meta: '3 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     details: 'Simulations and computer games as a learning tool. Traditional game and simulation genres, and their appropriate uses in education. Gameplay design. Game development process, from storyboarding to delivery. Assessing games as learning tools. Students will use a multimedia tool to prototype an educational game or simulation of their own design.'
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 598',
     title: 'Master’s Project in Technology and Society',
     meta: '- credits',
-    track: 'Concentration: Resilience and Sustainability',
+    track: 'Resilience and Sustainability (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -1187,11 +1220,11 @@ const rawCoursesData = [
   },
   {
     program: 'ms',
-    concen: 'Concentration: Educational Computing',
+    concen: 'Educational Computing (Not available at SUNY Korea)',
     code: 'EST 599',
     title: 'Special Projects and Topics',
     meta: '1-12 credits',
-    track: 'Concentration: Educational Computing',
+    track: 'Educational Computing (Not available at SUNY Korea)',
     prereq: 'None',
     repeatable: 'May be repeated for credit.',
     img: 'https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -1351,7 +1384,7 @@ function buildDegreeProgramComponents() {
                 const matchedCourses = concentrationGroups[concenName];
                 
                 const concenSection = document.createElement('div');
-                concenSection.className = 'concen-section open';
+                concenSection.className = 'concen-section close';
                 concenSection.id = uniqueConcenId;
                 
                 let coursesListHtml = '';
@@ -1381,6 +1414,8 @@ function switchDegreeTab(index) {
     for (let i = 0; i < 3; i++) {
         const btn = document.getElementById(`degree-btn-${i}`);
         const panel = document.getElementById(`degree-panel-${i}`);
+        const generalNotice = document.getElementById('generalNoticeBox');
+        const phdNotice = document.getElementById('phdNoticeBox');
         
         if (i === index) {
             btn.classList.add('active-tab-card');
@@ -1389,6 +1424,14 @@ function switchDegreeTab(index) {
             btn.classList.remove('active-tab-card');
             if(panel) panel.style.display = 'none';
         }
+    }
+
+    const showPhdNotices = (index === 2);
+    if (generalNotice) {
+        generalNotice.style.display = showPhdNotices ? 'block' : 'none';
+    }
+    if (phdNotice) {
+        phdNotice.style.display = showPhdNotices ? 'block' : 'none';
     }
 }
 
@@ -1419,5 +1462,6 @@ window.addEventListener('DOMContentLoaded', () => {
     buildDegreeProgramComponents();
 });
 </script>
+<script src="menu.js"></script>
 </body>
 </html>
